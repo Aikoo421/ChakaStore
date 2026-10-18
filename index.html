@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="Personal profile of cartyzzz — links, socials, and more.">
-  <title>cartyzzz — profile</title>
+  <meta name="description" content="Personal profile of Aikoo421 — links, socials, and more.">
+  <title>Aikoo421 — profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -257,54 +257,94 @@
       card.addEventListener("mouseleave", () => card.style.transform="perspective(1000px) rotateY(0) rotateX(0)");
     }
 
-    // Random playlist demo tracks. Browser audio starts only after the visitor clicks Play.
-    // If a track URL stops working, replace its src with a direct MP3 URL you have permission to use.
+    // Random playlist: these are direct MP3 files, not Spotify webpage URLs.
+    // Spotify links cannot be used as <audio src>; they need Spotify's embed/player.
     const playlist = [
-      { title: "BREAKBEAT AFTERSHOCK · Track 1", src: "https://open.spotify.com/track/6HLjAjyWfSs4TVE5rzKwGe?si=fQ37daB-T0egQcByQa4PuA&utm_source=copy-link" },
-      { title: "DJ IN YOUR EYES · Track 2", src: "https://open.spotify.com/track/1Ekl9OLJlijB0Tl8UAaBq4?si=D4br_ZtkSDG4vvPdo_6ZAg&utm_source=copy-link" },
-      { title: "BLACK HOLE · Track 3", src: "https://open.spotify.com/track/0LUEM4bPQ9uX79SXfg8KAE?si=W0WgCFR6SmG3zwDvvSUHPA&utm_source=copy-link" },
+      { title: "SOUNDHELIX · Track 1", artist: "Random instrumental", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      { title: "SOUNDHELIX · Track 2", artist: "Random instrumental", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      { title: "SOUNDHELIX · Track 3", artist: "Random instrumental", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
     ];
+
     const audio = document.getElementById("musicAudio");
     const playBtn = document.getElementById("playMusic");
     const trackTitle = document.getElementById("trackTitle");
     const trackSubtitle = document.getElementById("trackSubtitle");
     const musicDisc = document.getElementById("musicDisc");
-    let currentTrack = Math.floor(Math.random() * playlist.length);
+    let currentTrack = -1;
+
     function chooseRandomTrack() {
+      if (playlist.length === 0) return;
+      let next = Math.floor(Math.random() * playlist.length);
       if (playlist.length > 1) {
-        let next = currentTrack;
         while (next === currentTrack) next = Math.floor(Math.random() * playlist.length);
-        currentTrack = next;
       }
+      currentTrack = next;
       const track = playlist[currentTrack];
+      audio.pause();
       audio.src = track.src;
+      audio.load();
       trackTitle.textContent = track.title;
-      trackSubtitle.textContent = "Random playlist · tekan ▶ untuk memutar";
+      trackSubtitle.textContent = track.artist + " · tekan ▶ untuk memutar";
+      playBtn.textContent = "▶";
+      playBtn.setAttribute("aria-label", "Putar musik");
+      musicDisc.classList.remove("playing");
     }
+
     async function playCurrentTrack() {
       try {
-        if (!audio.src) chooseRandomTrack();
+        if (currentTrack < 0 || !audio.src) chooseRandomTrack();
+        trackSubtitle.textContent = "Memuat lagu...";
         await audio.play();
-        playBtn.textContent = "Ⅱ";
-        playBtn.setAttribute("aria-label", "Jeda musik");
-        trackSubtitle.textContent = "Now playing · random selection";
-        musicDisc.classList.add("playing");
-      } catch (err) {
-        trackSubtitle.textContent = "Musik gagal dimuat. Coba tekan ▶ lagi.";
-        toast.textContent = "Tidak bisa memutar lagu ini";
-        toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2000);
+      } catch (error) {
+        console.error("Audio gagal diputar:", error);
+        trackSubtitle.textContent = "Gagal memuat audio. Coba lagu berikutnya atau cek koneksi.";
+        toast.textContent = "Audio gagal dimuat — coba ⏭";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2600);
       }
     }
+
     playBtn.addEventListener("click", async () => {
-      if (audio.paused) await playCurrentTrack();
-      else {
-        audio.pause(); playBtn.textContent = "▶"; musicDisc.classList.remove("playing");
-        trackSubtitle.textContent = "Paused";
+      if (audio.paused) {
+        await playCurrentTrack();
+      } else {
+        audio.pause();
       }
     });
-    document.getElementById("nextTrack").addEventListener("click", async () => { chooseRandomTrack(); await playCurrentTrack(); });
-    document.getElementById("prevTrack").addEventListener("click", async () => { chooseRandomTrack(); await playCurrentTrack(); });
-    audio.addEventListener("ended", async () => { chooseRandomTrack(); await playCurrentTrack(); });
+
+    document.getElementById("nextTrack").addEventListener("click", async () => {
+      chooseRandomTrack();
+      await playCurrentTrack();
+    });
+
+    document.getElementById("prevTrack").addEventListener("click", async () => {
+      chooseRandomTrack();
+      await playCurrentTrack();
+    });
+
+    audio.addEventListener("play", () => {
+      playBtn.textContent = "Ⅱ";
+      playBtn.setAttribute("aria-label", "Jeda musik");
+      trackSubtitle.textContent = playlist[currentTrack].artist + " · sedang diputar";
+      musicDisc.classList.add("playing");
+    });
+
+    audio.addEventListener("pause", () => {
+      playBtn.textContent = "▶";
+      playBtn.setAttribute("aria-label", "Putar musik");
+      musicDisc.classList.remove("playing");
+      if (audio.currentTime > 0 && !audio.ended) trackSubtitle.textContent = "Dijeda";
+    });
+
+    audio.addEventListener("ended", async () => {
+      chooseRandomTrack();
+      await playCurrentTrack();
+    });
+
+    audio.addEventListener("error", () => {
+      trackSubtitle.textContent = "Sumber audio tidak tersedia. Tekan ⏭ untuk lagu lain.";
+    });
+
     chooseRandomTrack();
     document.getElementById("soundBtn").addEventListener("click", () => playBtn.click());
   </script>
