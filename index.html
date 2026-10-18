@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="Personal profile of Aikoo421 — links, socials, and more.">
-  <title>Aikoo421 — profile</title>
+  <meta name="description" content="Personal profile of ChakaVN — links, socials, and more.">
+  <title>ChakaVN — profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
     .profile::before { content:""; position:absolute; inset:0 0 auto; height:150px;
       background: linear-gradient(120deg, #b7a0ff22, transparent 55%), radial-gradient(ellipse at 90% 0%, #7c6cff25, transparent 55%);
       pointer-events:none; }
-    .banner { height: 125px; margin: -27px -27px 0; overflow:hidden; position:relative;
+    .banner { height: 145px; margin: -27px -27px 0; overflow:hidden; position:relative;
       background: linear-gradient(110deg, #29213e, #171722 50%, #17202d); }
     .banner::before { content:""; position:absolute; inset:-50%;
       background: repeating-linear-gradient(125deg, transparent 0 28px, #ffffff08 29px 30px);
@@ -122,11 +122,124 @@
       .profile-head { gap:12px; margin-top:-35px; }
       .avatar-wrap { width:72px; height:72px; }
       .bio { font-size:13px; }
-      .links { grid-template-columns:1fr; }
+      .links { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .link-card { padding:10px 9px; gap:8px; }
+      .link-icon { width:32px; height:32px; border-radius:9px; }
+      .link-text strong { font-size:12px; }
+      .link-text span { font-size:10px; }
+      .stats { gap:12px; justify-content:space-between; }
+      .now-playing { gap:8px; padding:10px; }
+      .music-controls { gap:4px; }
+      .music-btn { width:29px; height:29px; }
+      .topbar { width:max-content; overflow-x:auto; }
+      .banner::after { letter-spacing:1.5px; right:12px; bottom:12px; }
       .topbar { top:12px; max-width:calc(100% - 20px); }
       .topbar a, .topbar button { padding:8px 10px; font-size:11px; }
     }
     @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+
+    /* CHAKAVN GAMING AESTHETIC — visible animated banner + neon UI */
+    :root { --accent:#bba2ff; --glow:rgba(142,89,255,.32); }
+    body::before {
+      background:
+        radial-gradient(ellipse at 12% 18%, rgba(120,50,255,.30), transparent 35%),
+        radial-gradient(ellipse at 88% 68%, rgba(0,190,255,.16), transparent 32%),
+        radial-gradient(ellipse at 50% 100%, rgba(105,54,185,.13), transparent 45%),
+        linear-gradient(135deg,#050509,#0b0b15 48%,#05070d);
+      animation: ambientShift 12s ease-in-out infinite alternate;
+    }
+    @keyframes ambientShift { from { filter:hue-rotate(0deg) brightness(.92); } to { filter:hue-rotate(24deg) brightness(1.12); } }
+    .profile {
+      border-color:rgba(190,164,255,.28);
+      background:linear-gradient(145deg,rgba(19,17,31,.94),rgba(8,10,17,.91));
+      box-shadow:0 25px 100px #000b,0 0 55px rgba(126,72,255,.16),inset 0 1px #ffffff12;
+    }
+    .banner {
+      height:190px !important; margin:-27px -27px 0 !important; isolation:isolate;
+      background:
+        linear-gradient(90deg,rgba(7,7,18,.16),rgba(8,8,18,.05)),
+        radial-gradient(ellipse at 75% 35%,rgba(93,72,255,.68),transparent 32%),
+        radial-gradient(ellipse at 20% 80%,rgba(0,209,255,.23),transparent 40%),
+        linear-gradient(115deg,#100d25 0%,#17132e 43%,#101b2b 100%);
+    }
+    .banner::before {
+      inset:-100%; opacity:.7;
+      background:repeating-linear-gradient(125deg,transparent 0 22px,rgba(191,167,255,.12) 23px 24px);
+      animation:bannerDrift 18s linear infinite;
+    }
+    .banner::after {
+      width:300px;height:300px;right:8%;top:-210px;
+      border:1px solid #d5c8ff66;
+      box-shadow:0 0 0 22px #b7a0ff15,0 0 0 48px #b7a0ff0d,0 0 0 78px #b7a0ff08;
+      animation:orbitPulse 5s ease-in-out infinite alternate;
+    }
+    @keyframes bannerDrift { to { transform:translate3d(90px,35px,0) rotate(-8deg); } }
+    @keyframes orbitPulse { to { transform:scale(1.12); opacity:.5; } }
+    .banner-grid { position:absolute;inset:0;opacity:.35;z-index:-1;
+      background-image:linear-gradient(rgba(170,150,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(170,150,255,.12) 1px,transparent 1px);
+      background-size:32px 32px; mask-image:linear-gradient(90deg,transparent,#000 35%,#000); }
+    .banner-copy { position:absolute;left:28px;bottom:24px;display:flex;flex-direction:column;gap:5px;text-shadow:0 2px 20px #000; }
+    .banner-kicker { font-size:9px;letter-spacing:3px;color:#d7ceff; }
+    .banner-copy strong { font-size:clamp(27px,5vw,45px);line-height:1;font-weight:900;letter-spacing:3px;
+      color:#fff;text-shadow:0 0 12px #b39aff,0 0 34px #7954ff; animation:neonFlicker 4s infinite; }
+    .banner-copy small { font-size:9px;letter-spacing:2px;color:#c3c8e8; }
+    .banner-chip { position:absolute;right:22px;bottom:24px;border:1px solid #bba2ff66;background:#08081299;
+      border-radius:999px;padding:7px 11px;font-size:9px;letter-spacing:1.5px;color:#d9ceff;backdrop-filter:blur(8px); }
+    @keyframes neonFlicker { 0%,92%,96%,100%{opacity:1}94%{opacity:.72} }
+    .avatar-wrap { background:linear-gradient(135deg,#fff,#bba2ff,#7353ff,#32d9ff);box-shadow:0 0 0 5px #0a0914,0 0 28px #8f68ff88; }
+    .avatar { background:radial-gradient(circle at 30% 20%,#30264d,#10101a 70%);border-color:#090910;color:#dcd0ff;text-shadow:0 0 16px #a98aff; }
+    h1 { text-shadow:0 0 24px #9b78ff33; }
+    .verified { box-shadow:0 0 16px #b7a0ff88; }
+    .badge { border-color:#a68bff4d;background:linear-gradient(135deg,#a78bfa16,#ffffff04); }
+    .link-card { background:linear-gradient(120deg,#ffffff08,#8f72ff08);border-color:#ffffff19; }
+    .link-card:hover { box-shadow:0 8px 30px #754dff20; }
+    .link-icon { background:linear-gradient(145deg,#a78bfa24,#22d3ee0c); }
+    .section-title { color:#d8ccff; }
+    .now-playing { background:linear-gradient(110deg,#a78bfa12,#ffffff04); }
+    .disc { background:linear-gradient(135deg,#7150c9,#171427 65%,#164354);box-shadow:0 0 20px #7855ff24; }
+    .topbar { border-color:#c6b2ff32;background:rgba(8,8,17,.82); }
+    .sound { box-shadow:0 0 22px #7c55ff22; }
+    @media(max-width:520px) {
+      .banner { height:155px !important; margin:-19px -19px 0 !important; }
+      .banner-copy { left:18px;bottom:20px; }
+      .banner-copy strong { font-size:29px; }
+      .banner-copy small { max-width:200px;line-height:1.5;font-size:8px; }
+      .banner-chip { right:12px;bottom:17px;font-size:8px;padding:6px 8px; }
+      .profile-head { margin-top:-35px; }
+    }
+
+
+    /* Banner menggunakan foto gaming yang diberikan pengguna */
+    .banner {
+      height:220px !important;
+      margin:-27px -27px 0 !important;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      background:#080810 url("./assets/banner-gaming.jpg") center 42% / cover no-repeat !important;
+    }
+    .banner::before {
+      content:"";position:absolute;inset:0;z-index:0;
+      background:linear-gradient(90deg,rgba(3,4,10,.12),rgba(3,4,10,.15) 35%,rgba(3,4,10,.48)),
+                 linear-gradient(0deg,rgba(4,4,10,.78),transparent 78%);
+      animation:none;
+    }
+    .banner::after {
+      content:"";position:absolute;inset:10px;border:1px solid rgba(190,170,255,.28);
+      border-radius:3px;box-shadow:inset 0 0 35px rgba(110,75,255,.12);
+      width:auto;height:auto;right:10px;top:10px;animation:none;
+    }
+    .banner-copy { z-index:1;left:28px;bottom:25px; }
+    .banner-chip { z-index:1; }
+    .banner-grid { display:none; }
+    @media(max-width:520px) {
+      .banner { height:175px !important;margin:-19px -19px 0 !important;background-position:center 42% !important; }
+      .banner-copy { left:18px;bottom:20px; }
+      .banner-copy strong { font-size:28px; }
+      .banner-copy small { max-width:195px;line-height:1.5;font-size:8px; }
+      .banner-chip { right:18px;bottom:18px;font-size:8px;padding:6px 8px; }
+    }
+
   </style>
 </head>
 <body>
@@ -137,12 +250,12 @@
   </nav>
   <main id="home">
     <article class="profile" id="profileCard">
-      <div class="banner"></div>
+      <div class="banner" role="img" aria-label="Gaming setup banner"><div class="banner-photo-overlay"></div><div class="banner-copy"><span class="banner-kicker">PLAYER PROFILE // 11</span><strong>CHAKAVN</strong><small>GAMING • DIGITAL WORLD • ONLINE</small></div><span class="banner-chip">✦ ONLINE</span></div>
       <div class="profile-head">
         <div class="avatar-wrap"><div class="avatar" id="avatar">C</div></div>
         <div class="identity">
-          <div class="name-row"><h1 id="profileName">cartyzzz</h1><span class="verified" title="Verified-style badge">✓</span></div>
-          <div class="handle">@cartyzzz · <span style="color:#a7e7b4">● online</span></div>
+          <div class="name-row"><h1 id="profileName">ChakaVN</h1><span class="verified" title="Verified-style badge">✓</span></div>
+          <div class="handle">@ChakaVN · <span style="color:#a7e7b4">● online</span></div>
         </div>
       </div>
       <p class="bio" id="about">just a person on the internet.<br><span class="type" id="typedText"></span><span class="cursor"></span></p>
@@ -158,13 +271,12 @@
       <div class="links">
         <a class="link-card" data-social="instagram" href="https://www.instagram.com/dvoncliv03_/" target="_blank" rel="noopener noreferrer"><span class="link-icon">◎</span><span class="link-text"><strong>Instagram</strong><span>@dvoncliv03_</span></span></a>
         <a class="link-card" data-social="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener noreferrer"><span class="link-icon">◈</span><span class="link-text"><strong>Discord</strong><span>Open Discord</span></span></a>
-        <a class="link-card" data-social="github" href="https://github.com/Aikoo421" target="_blank" rel="noopener noreferrer"><span class="link-icon">⌘</span><span class="link-text"><strong>GitHub</strong><span>Aikoo421 · projects</span></span></a>
         <a class="link-card" data-social="spotify" href="https://open.spotify.com/user/312xxdjogx2vb3zwp2chwffrygxq?si=RCRUMxR6SPakmBE0pmSP_w&amp;utm_source=copy-link" target="_blank" rel="noopener noreferrer"><span class="link-icon">♫</span><span class="link-text"><strong>Spotify</strong><span>Listen with me</span></span></a>
       </div>
-      <div class="section-title">Random music player</div>
+      <div class="section-title">Breakbeat player</div>
       <div class="now-playing">
         <div class="disc" id="musicDisc">♫</div>
-        <div class="track"><strong id="trackTitle">Random track</strong><span id="trackSubtitle">Tekan play untuk mulai musik</span></div>
+        <div class="track"><strong id="trackTitle">Random track</strong><span id="trackSubtitle">Tekan ▶ untuk mulai · auto-next aktif</span></div>
         <div class="music-controls">
           <button class="music-btn" id="prevTrack" aria-label="Lagu acak sebelumnya" title="Lagu acak sebelumnya">⤮</button>
           <button class="music-btn primary" id="playMusic" aria-label="Putar musik" title="Putar / jeda">▶</button>
@@ -172,22 +284,22 @@
         </div>
       </div>
       <audio id="musicAudio" preload="metadata" controls aria-label="Pemutar musik"></audio>
+      <p style="color:var(--muted);font-size:11px;line-height:1.6;margin:8px 2px 0">Auto-next aktif setelah lagu selesai. Browser tetap membutuhkan klik pertama untuk mengizinkan musik diputar.</p>
     </article>
-    <footer class="footer">Made with <span>♥</span> · <span>cartyzzz</span> · personal profile</footer>
+    <footer class="footer">Made with <span>♥</span> · <span>ChakaVN</span> · personal profile</footer>
   </main>
   <button class="sound" id="soundBtn" aria-label="Toggle ambient sound" title="Ambient sound on/off">♫</button>
   <div class="toast" id="toast" role="status">Copied!</div>
   <script>
     // EDIT PROFIL DI SINI: nama, bio, foto, dan tautan sosial.
     const CONFIG = {
-      name: "Aikoo421",
+      name: "ChakaVN",
       avatarUrl: "", // isi URL foto atau gunakan "assets/avatar.jpg"
       phrases: ["welcome to my little corner.", "stay real, stay rare.", "less talk, more dreams."],
       profileUrl: window.location.href,
       links: {
         instagram: "https://www.instagram.com/dvoncliv03_/",
         discord: "https://discord.com/channels/@me",
-        github: "https://github.com/Aikoo421",
         spotify: "https://open.spotify.com/user/312xxdjogx2vb3zwp2chwffrygxq?si=RCRUMxR6SPakmBE0pmSP_w&utm_source=copy-link"
       }
     };
@@ -261,13 +373,13 @@
     // Playlist audio langsung. Jika hosting sumber pertama gagal, tombol berikutnya
     // dapat mencoba sumber lain. Untuk hasil paling stabil, simpan MP3 milikmu di repo.
     const playlist = [
-      { title: "Instrumental · Track 1", artist: "SoundHelix demo", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-      { title: "Instrumental · Track 2", artist: "SoundHelix demo", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-      { title: "Instrumental · Track 3", artist: "SoundHelix demo", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-      { title: "Instrumental · Track 4", artist: "SoundHelix demo", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
-      { title: "Instrumental · Track 5", artist: "SoundHelix demo", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" }
+      { title: "Breakbeat · Track 1", artist: "MP3 lokal · breakbeat-1.mp3", src: "./music/breakbeat-1.mp3", local: true },
+      { title: "Breakbeat · Track 2", artist: "MP3 lokal · breakbeat-2.mp3", src: "./music/breakbeat-2.mp3", local: true },
+      { title: "Breakbeat · Track 3", artist: "MP3 lokal · breakbeat-3.mp3", src: "./music/breakbeat-3.mp3", local: true },
+      { title: "Instrumental demo · 1", artist: "Demo online", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      { title: "Instrumental demo · 2", artist: "Demo online", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      { title: "Instrumental demo · 3", artist: "Demo online", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
     ];
-
     const audio = document.getElementById("musicAudio");
     const playBtn = document.getElementById("playMusic");
     const trackTitle = document.getElementById("trackTitle");
@@ -287,7 +399,7 @@
       const available = playlist.map((_, i) => i).filter(i => !failedTracks.has(i));
       if (!available.length) {
         trackTitle.textContent = "Audio tidak tersedia";
-        trackSubtitle.textContent = "Cek koneksi atau gunakan file MP3 lokal.";
+        trackSubtitle.textContent = "Tambahkan MP3 breakbeat ke folder music/.";
         showToast("Semua sumber audio gagal diakses.");
         return false;
       }
@@ -353,9 +465,17 @@
       if (currentTrack < 0) return;
       // Tandai sumber gagal agar pemutar tidak terjebak pada URL yang sama.
       failedTracks.add(currentTrack);
-      trackSubtitle.textContent = "Sumber ini gagal dimuat. Tekan ⏭ untuk mencoba lainnya.";
+      trackSubtitle.textContent = "File gagal dimuat. Cek folder music/ atau tekan ⏭.";
       playBtn.textContent = "▶";
       musicDisc.classList.remove("playing");
+      // Lewati track yang gagal dan coba sumber berikutnya otomatis.
+      if (!isTryingTrack) {
+        isTryingTrack = true;
+        setTimeout(async () => {
+          if (chooseRandomTrack()) await playCurrentTrack();
+          isTryingTrack = false;
+        }, 350);
+      }
     });
 
     chooseRandomTrack();
