@@ -1,302 +1,341 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0b12">
-  <meta name="description" content="CHAKA Security — edukasi keamanan digital dan perlindungan komunitas Discord dari phishing.">
+  <meta name="description" content="CHAKA Security — edukasi keamanan digital, panduan anti-phishing, dan perlindungan komunitas Discord.">
   <title>CHAKA Security | Stay Safe Online</title>
-
-/* CHAKA URL Checker */
-.checker {
-  background: #151521;
-  border: 1px solid #403458;
-  border-radius: 18px;
-  padding: 24px;
-  margin-top: 20px;
-}
-.checker input {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin: 14px 0;
-  background: #0b0b12;
-  color: #f5f3ff;
-  border: 1px solid #51436e;
-  border-radius: 10px;
-  font-size: 16px;
-}
-.checker button {
-  background: #a78bfa;
-  color: #171024;
-  border: 0;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-#scan-result {
-  margin-top: 18px;
-  overflow-wrap: anywhere;
-}
   <style>
-.checker {
-  background: #151521;
-  border: 1px solid #403458;
-  border-radius: 18px;
-  padding: 24px;
-  margin-top: 20px;
-}
-
-.checker label {
-  display: block;
-  margin-bottom: 10px;
-  color: #f5f3ff;
-}
-
-.checker input {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px;
-  margin: 14px 0;
-  background: #0b0b12;
-  color: #f5f3ff;
-  border: 1px solid #51436e;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.checker input:focus {
-  outline: 2px solid #a78bfa;
-  outline-offset: 2px;
-}
-
-.checker button {
-  background: #a78bfa;
-  color: #171024;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.checker button:hover {
-  background: #c4b5fd;
-}
-
-#scan-result {
-  margin-top: 18px;
-  overflow-wrap: anywhere;
-  color: #f5f3ff;
-}
-
-#scan-result p {
-  color: #b7b4c9;
-}
-
-@media (max-width: 600px) {
-  .checker {
-    padding: 16px;
-  }
-
-  .checker button {
-    width: 100%;
-  }
-}
-
     :root {
       color-scheme: dark;
       --bg: #0b0b12;
       --panel: #151521;
+      --panel-light: #1b1930;
       --purple: #a78bfa;
+      --purple-bright: #c4b5fd;
       --text: #f5f3ff;
       --muted: #b7b4c9;
       --border: #302b45;
+      --green: #86efac;
+      --red: #fca5a5;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background:
-        radial-gradient(ellipse at top, #292047 0%, var(--bg) 52%);
+        radial-gradient(ellipse at 50% -10%, #30234d 0, transparent 48%),
+        var(--bg);
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
     }
-    header, main, footer {
-      width: min(100% - 32px, 960px);
-      margin: auto;
+    a { color: inherit; }
+    .container { width: min(1080px, calc(100% - 36px)); margin-inline: auto; }
+    .site-header {
+      display: flex; justify-content: space-between; align-items: center; gap: 18px;
+      padding: 22px 0; border-bottom: 1px solid rgba(167,139,250,.13);
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 24px 0;
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 900; letter-spacing: .08em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px;
+      background: linear-gradient(135deg, #c4b5fd, #7c3aed); color: #140d25; font-size: 22px;
+      box-shadow: 0 8px 30px #8b5cf633;
     }
-    .brand { font-weight: 800; letter-spacing: 1px; }
     .brand span { color: var(--purple); }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 16px;
-      font-size: 14px;
-    }
-    nav a:hover { color: white; }
-    .hero { padding: 72px 0 56px; text-align: center; }
-    .shield { font-size: 48px; }
+    nav { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+    nav a { text-decoration: none; color: var(--muted); font-size: .92rem; }
+    nav a:hover { color: var(--text); }
+    .hero { text-align: center; padding: 86px 0 72px; }
     .eyebrow {
-      color: var(--purple);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: bold;
+      display: inline-flex; gap: 8px; align-items: center; padding: 6px 12px; border-radius: 999px;
+      border: 1px solid #6d5a9c; background: #1a1530; color: var(--purple-bright);
+      text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 800;
     }
-    h1 {
-      font-size: clamp(38px, 7vw, 68px);
-      line-height: 1.08;
-      margin: 14px 0;
-    }
+    h1 { margin: 20px auto 18px; max-width: 850px; font-size: clamp(2.8rem, 8vw, 5.7rem); line-height: 1.02; letter-spacing: -.055em; }
     h1 span { color: var(--purple); }
-    .intro {
-      max-width: 650px;
-      margin: 20px auto 28px;
-      color: var(--muted);
-    }
+    .hero p { max-width: 690px; margin: 0 auto; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
     .button {
-      display: inline-block;
-      background: var(--purple);
-      color: #171024;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 12px;
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 46px;
+      padding: 11px 18px; border-radius: 12px; text-decoration: none; font-weight: 800;
+      border: 1px solid transparent; transition: transform .18s ease, background .18s ease;
     }
-    section { padding: 28px 0; }
-    h2 { font-size: 28px; margin-bottom: 8px; }
-    .sub { color: var(--muted); margin-top: 0; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--purple); color: #171024; }
+    .button-primary:hover { background: var(--purple-bright); }
+    .button-secondary { background: #ffffff08; border-color: var(--border); color: var(--text); }
+    .button-secondary:hover { background: #ffffff12; }
+    .trust-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+    .trust-pill { padding: 7px 12px; color: var(--muted); background: #ffffff06; border: 1px solid var(--border); border-radius: 999px; font-size: .82rem; }
+    section { padding: 34px 0; scroll-margin-top: 20px; }
+    .section-heading { max-width: 700px; margin-bottom: 22px; }
+    .section-heading h2 { margin: 0 0 8px; font-size: clamp(1.7rem, 4vw, 2.25rem); letter-spacing: -.03em; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 22px;
-      border-radius: 18px;
+      background: linear-gradient(160deg, #191827, var(--panel));
+      border: 1px solid var(--border); border-radius: 20px; padding: 24px;
+      box-shadow: 0 12px 35px #00000012;
     }
-    .card .icon { font-size: 27px; }
-    .card h3 { margin: 10px 0 6px; }
-    .card p, li { color: var(--muted); }
-    .notice {
-      border-left: 4px solid var(--purple);
-      background: #171326;
-      border-radius: 8px;
-      padding: 18px;
-      margin-top: 18px;
+    .card-icon {
+      display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px;
+      background: #a78bfa18; border: 1px solid #a78bfa2b; font-size: 25px;
     }
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 48px;
-      padding: 24px 0 36px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
+    .card h3 { margin: 14px 0 7px; font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); }
+    .check-layout { display: grid; grid-template-columns: 1fr .85fr; gap: 16px; align-items: start; }
+    .checklist { list-style: none; padding: 0; margin: 0; }
+    .checklist li { display: flex; gap: 11px; padding: 10px 0; color: var(--muted); border-bottom: 1px solid #ffffff0b; }
+    .checklist li:last-child { border-bottom: 0; }
+    .checkmark { color: var(--green); font-weight: 900; }
+    .notice { background: #1b1530; border: 1px solid #58447e; border-left: 4px solid var(--purple); border-radius: 14px; padding: 18px; color: var(--muted); }
+    .notice strong { color: var(--text); }
+    .checker { background: linear-gradient(145deg, #1b1930, #11111b); border: 1px solid #51436e; border-radius: 22px; padding: 24px; }
+    .checker label { display: block; margin-bottom: 9px; font-weight: 750; }
+    .input-row { display: flex; gap: 10px; }
+    .checker input {
+      min-width: 0; flex: 1; width: 100%; padding: 13px 14px; background: #0b0b12; color: var(--text);
+      border: 1px solid #51436e; border-radius: 11px; font: inherit;
     }
-    @media (max-width: 540px) {
-      header { align-items: flex-start; flex-direction: column; }
-      nav a { margin: 0 14px 0 0; }
-      .hero { padding-top: 48px; }
+    .checker input:focus { outline: 2px solid var(--purple); outline-offset: 2px; }
+    .checker button {
+      border: 0; border-radius: 11px; padding: 12px 16px; background: var(--purple); color: #171024;
+      font: inherit; font-weight: 850; cursor: pointer;
+    }
+    .checker button:hover { background: var(--purple-bright); }
+    #scan-result { margin-top: 16px; overflow-wrap: anywhere; }
+    #scan-result:empty { display: none; }
+    #scan-result p { margin: 7px 0; color: var(--muted); }
+    .result-box { padding: 14px; border-radius: 12px; background: #ffffff08; border: 1px solid var(--border); }
+    .small-note { margin: 12px 0 0; color: var(--muted); font-size: .85rem; }
+    .community {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: clamp(22px, 5vw, 38px); border-radius: 24px;
+      background: linear-gradient(120deg, #241b3c, #151521 70%);
+      border: 1px solid #57477c;
+    }
+    .community h2 { margin: 0 0 8px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .community p { margin: 0; max-width: 620px; color: var(--muted); }
+    .contact-id { display: block; margin-top: 8px; color: var(--purple-bright); font-size: .9rem; overflow-wrap: anywhere; }
+    footer { margin-top: 54px; padding: 26px 0 34px; border-top: 1px solid var(--border); color: var(--muted); font-size: .88rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    footer p { margin: 4px 0; }
+    footer a { color: var(--purple-bright); text-decoration: none; }
+    @media (max-width: 760px) {
+      .site-header { align-items: flex-start; flex-direction: column; }
+      nav { gap: 14px; }
+      .hero { padding: 60px 0 48px; }
+      .grid { grid-template-columns: 1fr; }
+      .check-layout { grid-template-columns: 1fr; }
+      .community { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 26px, 1080px); }
+      .input-row { flex-direction: column; }
+      .checker button { width: 100%; }
+      .card, .checker { padding: 19px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">CHAKA <span>SECURITY</span></div>
+  <header class="site-header container">
+    <a class="brand" href="#" aria-label="CHAKA Security beranda">
+      <span class="brand-mark" aria-hidden="true">🛡</span>
+      <span>CHAKA <span>SECURITY</span></span>
+    </a>
     <nav aria-label="Navigasi utama">
       <a href="#learn">Panduan</a>
       <a href="#checklist">Checklist</a>
-      <a href="#report">Bantuan</a>
+      <a href="#checker">Periksa URL</a>
+      <a href="#contact">Kontak</a>
     </nav>
   </header>
 
-  <main>
+  <main class="container">
     <section class="hero">
-      <div class="shield" aria-hidden="true">🛡️</div>
-      <div class="eyebrow">Protect your digital world</div>
+      <div class="eyebrow">🛡️ Keamanan digital untuk komunitas</div>
       <h1>Think before<br><span>you click.</span></h1>
-      <p class="intro">
-        Selamat datang di CHAKA Security, pusat edukasi keamanan digital
-        untuk membantu komunitas mengenali tautan mencurigakan dan
-        menghindari penipuan online.
-      </p>
-      <a class="button" href="#learn">Pelajari Keamanan</a>
+      <p>Selamat datang di CHAKA Security — ruang edukasi untuk mengenali phishing, memeriksa tanda-tanda tautan mencurigakan, dan menjaga komunitas tetap aman di dunia digital.</p>
+      <div class="actions">
+        <a class="button button-primary" href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">💬 Gabung CHAKA STORE <span aria-hidden="true">↗</span></a>
+        <a class="button button-secondary" href="#checker">🔎 Periksa tautan</a>
+      </div>
+      <div class="trust-row" aria-label="Prinsip keamanan">
+        <span class="trust-pill">🔐 Lindungi akun</span>
+        <span class="trust-pill">🧠 Kenali penipuan</span>
+        <span class="trust-pill">🤝 Jaga komunitas</span>
+      </div>
     </section>
 
     <section id="learn">
-      <h2>Kenali Ancaman Digital</h2>
-      <p class="sub">Berhenti sejenak sebelum membuka tautan yang tidak dikenal.</p>
+      <div class="section-heading">
+        <h2>Kenali ancaman digital</h2>
+        <p>Penipu sering memanfaatkan rasa penasaran, hadiah, dan situasi mendesak. Kenali tanda-tandanya sebelum bertindak.</p>
+      </div>
       <div class="grid">
         <article class="card">
-          <div class="icon">🎣</div>
+          <div class="card-icon" aria-hidden="true">🎣</div>
           <h3>Phishing</h3>
-          <p>Penipuan yang menyamar sebagai layanan tepercaya untuk
-          membujuk korban memberikan informasi pribadi.</p>
+          <p>Pesan atau situs palsu yang menyamar sebagai layanan tepercaya untuk mencuri informasi login atau data pribadi.</p>
         </article>
         <article class="card">
-          <div class="icon">🔗</div>
-          <h3>Tautan Palsu</h3>
-          <p>Perhatikan salah eja, domain yang aneh, dan alamat yang
-          berbeda dari situs resmi.</p>
+          <div class="card-icon" aria-hidden="true">🔗</div>
+          <h3>Tautan palsu</h3>
+          <p>Waspadai salah eja, domain aneh, nama yang meniru situs resmi, dan alamat yang tidak sesuai konteks.</p>
         </article>
         <article class="card">
-          <div class="icon">🎁</div>
-          <h3>Hadiah Palsu</h3>
-          <p>Waspadai hadiah, Nitro, atau giveaway yang meminta password,
-          token, pembayaran, atau tindakan mendesak.</p>
+          <div class="card-icon" aria-hidden="true">🎁</div>
+          <h3>Hadiah palsu</h3>
+          <p>Giveaway atau hadiah Nitro palsu dapat meminta login, token, pembayaran, atau tindakan cepat yang mencurigakan.</p>
         </article>
       </div>
     </section>
 
     <section id="checklist">
-      <h2>Checklist Sebelum Klik</h2>
-      <div class="card">
-        <ul>
-          <li>Periksa nama domain dengan teliti.</li>
-          <li>Jangan login melalui tautan yang dikirim orang tak dikenal.</li>
-          <li>Jangan pernah membagikan password atau token Discord.</li>
-          <li>Aktifkan autentikasi dua faktor jika tersedia.</li>
-          <li>Jika ragu, buka situs resmi dengan mengetik alamatnya sendiri.</li>
-        </ul>
+      <div class="section-heading">
+        <h2>Checklist sebelum klik</h2>
+        <p>Biasakan melakukan pemeriksaan singkat sebelum membuka tautan atau memasukkan informasi akun.</p>
       </div>
-      <div class="notice">
-        <strong>Ingat:</strong> tampilan profesional dan ikon gembok HTTPS
-        tidak menjamin sebuah situs aman.
+      <div class="check-layout">
+        <div class="card">
+          <ul class="checklist">
+            <li><span class="checkmark">✓</span><span>Periksa ejaan dan nama domain dengan teliti.</span></li>
+            <li><span class="checkmark">✓</span><span>Jangan login melalui tautan dari orang yang tidak dikenal.</span></li>
+            <li><span class="checkmark">✓</span><span>Jangan pernah membagikan password atau token Discord.</span></li>
+            <li><span class="checkmark">✓</span><span>Aktifkan autentikasi dua faktor jika tersedia.</span></li>
+            <li><span class="checkmark">✓</span><span>Jika ragu, ketik sendiri alamat situs resminya.</span></li>
+          </ul>
+        </div>
+        <aside class="notice">
+          <strong>Ingat baik-baik</strong>
+          <p>Ikon gembok dan HTTPS hanya menunjukkan koneksi terenkripsi; keduanya tidak menjamin bahwa pemilik situs dapat dipercaya.</p>
+          <p>Jangan unduh file atau masukkan data pribadi jika kamu belum yakin dengan sumbernya.</p>
+        </aside>
       </div>
     </section>
 
-    <section id="report">
-      <h2>Menemukan Tautan Mencurigakan?</h2>
-      <p class="sub">
-        Jangan klik atau sebarkan tautan tersebut. Laporkan kepada moderator
-        server CHAKA STORE melalui channel keamanan yang telah ditentukan.
-      </p>
-      <div class="notice">
-        Website ini merupakan pusat edukasi. Saat ini website belum memindai
-        URL secara otomatis dan belum mengirim laporan ke bot Discord.
-        Jangan memasukkan password, token, atau data pribadi ke halaman ini.
+    <section id="checker">
+      <div class="section-heading">
+        <h2>CHAKA URL Checker</h2>
+        <p>Pemeriksaan lokal sederhana untuk menemukan beberapa tanda yang perlu diwaspadai.</p>
       </div>
+      <div class="checker">
+        <label for="url-input">Masukkan alamat URL</label>
+        <div class="input-row">
+          <input id="url-input" type="text" placeholder="contoh.com atau https://contoh.com" autocomplete="url" spellcheck="false">
+          <button id="scan-button" type="button">Periksa URL</button>
+        </div>
+        <div id="scan-result" role="status" aria-live="polite"></div>
+        <p class="small-note">Privasi: alamat yang dimasukkan diproses di browser ini dan tidak dikirim ke server oleh fitur ini. Pemeriksaan ini bukan pemindai reputasi dan tidak menjamin situs aman.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="community">
+        <div>
+          <h2>Jaga komunitas bersama CHAKA STORE</h2>
+          <p>Menemukan tautan mencurigakan? Jangan klik atau sebarkan. Laporkan kepada moderator melalui server Discord CHAKA STORE.</p>
+          <span class="contact-id">Kontak admin Discord: ganti USER_ID_DISCORD di source code dengan ID pengguna Discord yang benar.</span>
+        </div>
+        <div class="actions">
+          <a class="button button-primary" href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Gabung server ↗</a>
+          <a class="button button-secondary" href="https://discord.com/users/GANTI_DENGAN_ID_USER_DISCORD" target="_blank" rel="noopener noreferrer">Hubungi admin ↗</a>
+        </div>
+      </div>
+      <p class="small-note">Tombol kontak admin belum aktif untuk pengguna tertentu sampai ID Discord admin diganti pada tautan di file HTML.</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 CHAKA Security · Built to protect the community.</p>
-    <p>Stay alert. Stay kind. Stay secure.</p>
+    <div class="footer-inner container">
+      <div>
+        <p><strong>© 2026 CHAKA Security</strong> · Built to protect the community.</p>
+        <p>Stay alert. Stay kind. Stay secure.</p>
+      </div>
+      <a href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Discord CHAKA STORE ↗</a>
+    </div>
+    <a href="https://discord.com/users/976065711556407326"
+   target="_blank"
+   rel="noopener noreferrer">
+  Hubungi Admin CHAKA
+</a>
   </footer>
+
+  <script>
+    (() => {
+      const input = document.getElementById("url-input");
+      const button = document.getElementById("scan-button");
+      const result = document.getElementById("scan-result");
+      if (!input || !button || !result) return;
+
+      function scanUrl() {
+        const raw = input.value.trim();
+        result.replaceChildren();
+
+        const panel = document.createElement("div");
+        panel.className = "result-box";
+        const heading = document.createElement("strong");
+        const details = document.createElement("p");
+        const advice = document.createElement("p");
+        panel.append(heading, details, advice);
+        result.append(panel);
+
+        if (!raw) {
+          heading.textContent = "Masukkan URL terlebih dahulu.";
+          details.textContent = "Contoh: https://example.com";
+          advice.textContent = "";
+          return;
+        }
+
+        let url;
+        try {
+          url = new URL(/^[a-z][a-z0-9+.-]*:/i.test(raw) ? raw : "https://" + raw);
+        } catch {
+          heading.textContent = "⚠️ Format URL tidak valid.";
+          details.textContent = "Periksa kembali penulisan alamat situs.";
+          advice.textContent = "Jangan masukkan informasi akun jika alamatnya belum jelas.";
+          return;
+        }
+
+        if (!["http:", "https:"].includes(url.protocol)) {
+          heading.textContent = "⚠️ Protokol URL tidak didukung.";
+          details.textContent = "Gunakan alamat web HTTP atau HTTPS.";
+          advice.textContent = "";
+          return;
+        }
+
+        const host = url.hostname.toLowerCase();
+        const flags = [];
+        if (url.username || url.password) flags.push("URL berisi informasi pengguna sebelum nama host.");
+        if (url.protocol !== "https:") flags.push("URL tidak menggunakan HTTPS.");
+        if (host.startsWith("xn--") || host.includes(".xn--")) flags.push("Domain menggunakan format Punycode.");
+        if (/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) flags.push("Alamat menggunakan IP langsung, bukan nama domain.");
+        const officialDiscordDomains = ["discord.com", "discord.gg", "discordapp.com", "discordapp.net"];
+        if (host.includes("discord") && !officialDiscordDomains.some(domain => host === domain || host.endsWith("." + domain))) {
+          flags.push("Nama domain menyerupai Discord tetapi bukan domain Discord yang dikenal.");
+        }
+        if (flags.length) {
+          heading.textContent = "⚠️ Perlu diperiksa lebih lanjut";
+          details.textContent = flags.join(" ");
+          advice.textContent = "Jangan masukkan password atau token. Verifikasi alamat melalui sumber resmi.";
+        } else {
+          heading.textContent = "ℹ️ Tidak ditemukan indikator sederhana";
+          details.textContent = "Pemeriksaan awal tidak menemukan pola yang diperiksa.";
+          advice.textContent = "Ini bukan jaminan aman. Situs phishing dapat lolos dari pemeriksaan ini.";
+        }
+
+        const hostLine = document.createElement("p");
+        hostLine.textContent = "Domain yang diperiksa: " + host;
+        panel.append(hostLine);
+      }
+
+      button.addEventListener("click", scanUrl);
+      input.addEventListener("keydown", event => {
+        if (event.key === "Enter") scanUrl();
+      });
+    })();
+  </script>
 </body>
 </html>
