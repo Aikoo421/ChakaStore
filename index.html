@@ -36,12 +36,26 @@ h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.065em;margin:
 footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a:hover{color:white}
 @media(max-width:760px){.nav-links{display:none}.hero-grid{grid-template-columns:1fr;padding-top:30px}.profile{max-width:440px;width:100%;margin:auto}.cards{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}}
 @media(max-width:520px){.wrap{width:calc(100% - 24px)}nav{min-height:68px}.brand{font-size:12px}nav>.btn{padding:11px 12px;font-size:11px}.hero{padding-top:20px}.banner{height:205px;border-radius:20px}.hero-grid{padding-left:0;padding-right:0}.cards{grid-template-columns:1fr}.callout{align-items:flex-start;flex-direction:column;padding:23px}h1{font-size:48px}.lead{font-size:14px}}
+
+/* Katalog produk dan tombol pemesanan */
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.product-card{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:23px;border:1px solid #ffffff1c;border-radius:23px;background:linear-gradient(145deg,#191323,#100d17);box-shadow:0 15px 40px #0003;transition:transform .25s,border-color .25s,box-shadow .25s}
+.product-card:hover{transform:translateY(-5px);border-color:#a23bff99;box-shadow:0 16px 42px #7b2cff20,0 0 0 1px #a23bff16}
+.product-art{display:grid;place-items:center;min-height:115px;margin-bottom:18px;border:1px solid #a23bff25;border-radius:17px;background:radial-gradient(circle at 25% 20%,#a23bff35,transparent 55%),linear-gradient(135deg,#21152f,#11101a);font-size:42px}
+.product-tag{align-self:flex-start;margin-bottom:10px;padding:6px 9px;border:1px solid #a23bff40;border-radius:999px;color:#d8b5ff;font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.product-card h3{margin:0 0 8px;font-size:18px}.product-card p{margin:0 0 15px;color:var(--muted);font-size:13px;line-height:1.7}
+.product-price{margin-top:auto;margin-bottom:17px;color:#f5eaff;font-size:14px;font-weight:900}.product-price small{display:block;margin-bottom:4px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.product-actions{display:grid;grid-template-columns:1fr;gap:9px}.order-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 13px;border:1px solid #ffffff1c;border-radius:12px;background:#ffffff08;color:#fff;font-size:12px;font-weight:850;text-align:center;cursor:pointer;transition:.2s}.order-btn:hover{transform:translateY(-2px);border-color:#a23bff99;background:#a23bff18}.order-btn.whatsapp{border:0;background:linear-gradient(110deg,#168b52,#20b86a);box-shadow:0 8px 20px #20b86a20}.order-btn.whatsapp:hover{background:linear-gradient(110deg,#1ba660,#35d883)}
+.product-note{margin-top:18px;padding:13px 15px;border:1px solid #a23bff26;border-radius:14px;background:#a23bff0b;color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:760px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.product-grid{grid-template-columns:1fr}.product-card{padding:19px}.product-art{min-height:95px}}
+
 </style>
 </head>
 <body>
 <header><nav class="wrap">
 <a class="brand" href="#home" aria-label="Chaka Store beranda"><span class="brand-mark">CS</span><span>CHAKA <span style="color:#ff78a1">STORE</span></span></a>
-<div class="nav-links"><a href="#tentang">Tentang</a><a href="#akses">Link akses</a><a href="#kontak">Kontak</a></div>
+<div class="nav-links"><a href="#tentang">Tentang</a><a href="#produk">Produk</a><a href="#akses">Link akses</a><a href="#kontak">Kontak</a></div>
 <a class="btn primary" href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Gabung Discord ↗</a>
 </nav></header>
 <main id="home" class="wrap">
@@ -63,75 +77,65 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;colo
 </aside>
 </div>
 </section>
+<section class="section" id="produk">
+<div class="section-head"><div><div class="kicker">Product catalog</div><h2>Pilih produkmu.</h2></div><p>Pilih produk yang kamu inginkan, lalu lanjutkan pemesanan melalui WhatsApp admin atau Discord Support.</p></div>
+<div class="product-grid">
+  <!-- EDIT PRODUK: ubah nama, deskripsi, ikon, dan harga di setiap kartu di bawah ini. -->
+  <article class="product-card" data-product="Produk Digital 1">
+    <div class="product-art" aria-hidden="true">✨</div><span class="product-tag">Produk digital</span><h3>Produk Digital 1</h3><p>Ganti teks ini dengan penjelasan singkat produk digital yang kamu jual.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+  <article class="product-card" data-product="Layanan Discord">
+    <div class="product-art" aria-hidden="true">🎧</div><span class="product-tag">Layanan Discord</span><h3>Layanan Discord</h3><p>Ganti teks ini dengan detail layanan Discord, setup server, bot, atau kebutuhan lain.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+  <article class="product-card" data-product="Produk Game">
+    <div class="product-art" aria-hidden="true">🕹️</div><span class="product-tag">Gaming</span><h3>Produk Game</h3><p>Ganti teks ini dengan nama dan informasi produk game yang tersedia di toko.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+</div>
+<div class="product-note">Harga pada kartu masih berupa placeholder, bukan harga resmi. Ubah nama, deskripsi, dan harga sesuai katalog aktual sebelum website dipublikasikan.</div>
+</section>
 <section class="section" id="akses">
-  <div class="section-head">
-    <div>
-      <div class="kicker">Quick access</div>
-      <h2>Pilih tujuanmu.</h2>
-    </div>
-    <p>
-      Pilih komunitas atau layanan yang ingin kamu kunjungi.
-      Klik kartu untuk membuka server Discord terkait.
-    </p>
-  </div>
-
-  <div class="cards">
-    <!-- 1. Server Utama Chaka Store -->
-    <a class="card" style="--glow:#5865f533"
-       href="https://discord.gg/PDCAgvpPJu"
-       target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">💬</div>
-      <h3>Server Utama</h3>
-      <p>Gabung komunitas resmi Chaka Store untuk mendapatkan informasi, ngobrol, dan mengikuti aktivitas komunitas.</p>
-      <span class="card-link">Gabung komunitas <span>↗</span></span>
-    </a>
-
-    <!-- 2. Customer Support -->
-    <a class="card" style="--glow:#a23bff33"
-       href="https://discord.gg/hYV749ckgm"
-       target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">🎫</div>
-      <h3>Customer Support</h3>
-      <p>Butuh bantuan atau ingin bertanya? Masuk ke server ticket untuk menghubungi tim kami.</p>
-      <span class="card-link">Buka layanan ticket <span>↗</span></span>
-    </a>
-
-    <!-- 3. Produk Digital -->
-    <a class="card" style="--glow:#ff315933"
-       href="https://discord.gg/EjPTSJygm3"
-       target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">🛍️</div>
-      <h3>Produk Digital</h3>
-      <p>Temukan produk dan kebutuhan digital, termasuk layanan Discord dan produk game seperti Robux.</p>
-      <span class="card-link">Lihat produk <span>↗</span></span>
-    </a>
-
-    <!-- 4. Komunitas 11DKK -->
-    <a class="card" style="--glow:#5865f533"
-       href="https://discord.gg/11dkk"
-       target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">🎮</div>
-      <h3>Komunitas 11DKK</h3>
-      <p>Gabung ke server komunitas 11DKK untuk bertemu teman baru, ngobrol, dan ikut aktivitas komunitas.</p>
-      <span class="card-link">Gabung 11DKK <span>↗</span></span>
-    </a>
-
-    <!-- 5. Serein Zone -->
-    <a class="card" style="--glow:#a23bff33"
-       href="https://discord.gg/sereinzone"
-       target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">🌌</div>
-      <h3>Serein Zone</h3>
-      <p>Kunjungi komunitas Serein Zone dan temukan tempat baru untuk berkumpul bersama anggota lainnya.</p>
-      <span class="card-link">Gabung Serein Zone <span>↗</span></span>
-    </a>
-  </div>
+<div class="section-head"><div><div class="kicker">Quick access</div><h2>Pilih tujuanmu.</h2></div><p>Pilih tujuan yang kamu butuhkan: akses Chaka Store atau kunjungi komunitas gaming kami.</p></div>
+<div class="cards">
+<a class="card" style="--glow:#5865f533" href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer"><div class="card-icon">💬</div><h3>Server Utama</h3><p>Gabung komunitas resmi Chaka Store untuk mendapatkan informasi, ngobrol, dan mengikuti aktivitas komunitas.</p><span class="card-link">Gabung komunitas <span>↗</span></span></a>
+<a class="card" style="--glow:#a23bff33" href="https://discord.gg/hYV749ckgm" target="_blank" rel="noopener noreferrer"><div class="card-icon">🎫</div><h3>Customer Support</h3><p>Butuh bantuan atau ingin bertanya? Masuk ke server ticket untuk menghubungi tim kami.</p><span class="card-link">Buka layanan ticket <span>↗</span></span></a>
+<a class="card" style="--glow:#ff315933" href="https://discord.gg/EjPTSJygm3" target="_blank" rel="noopener noreferrer"><div class="card-icon">🛍️</div><h3>Produk Digital</h3><p>Temukan produk dan kebutuhan digital, termasuk layanan Discord dan produk game seperti Robux.</p><span class="card-link">Lihat produk <span>↗</span></span></a>
+<a class="card" style="--glow:#5865f533" href="https://discord.gg/11dkk" target="_blank" rel="noopener noreferrer"><div class="card-icon">🎮</div><h3>Komunitas 11DKK</h3><p>Gabung ke komunitas 11DKK untuk bertemu teman baru, ngobrol, dan mengikuti aktivitas komunitas gaming.</p><span class="card-link">Gabung 11DKK <span>↗</span></span></a>
+<a class="card" style="--glow:#a23bff33" href="https://discord.gg/sereinzone" target="_blank" rel="noopener noreferrer"><div class="card-icon">🌌</div><h3>Serein Zone</h3><p>Kunjungi Serein Zone dan temukan komunitas untuk berkumpul serta bermain bersama.</p><span class="card-link">Gabung Serein Zone <span>↗</span></span></a>
+</div>
 </section>
 <section class="section" id="kontak">
 <div class="callout"><div><div class="kicker">Need some help?</div><h2>Ada yang bisa kami bantu?</h2><p>Hubungi tim melalui server support dan buat ticket sesuai kebutuhanmu.</p></div><a class="btn primary" href="https://discord.gg/hYV749ckgm" target="_blank" rel="noopener noreferrer">Hubungi Kami ↗</a></div>
 </section>
 </main>
 <footer><div class="wrap footer-inner"><span>© <span id="year"></span> CHAKA STORE. Dibuat untuk memudahkan akses komunitas.</span><div class="footer-links"><a href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Discord</a><a href="https://discord.gg/hYV749ckgm" target="_blank" rel="noopener noreferrer">Support</a><a href="https://discord.gg/EjPTSJygm3" target="_blank" rel="noopener noreferrer">Produk</a><a href="#home">Kembali ke atas ↑</a></div></div></footer>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+const CHAKA_WA_NUMBER = "6282187552664"; // Nomor admin: 082187552664
+const CHAKA_DISCORD_SUPPORT = "https://discord.gg/hYV749ckgm";
+document.querySelectorAll("[data-order]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const card = button.closest("[data-product]");
+    const productName = card?.dataset.product || "Produk Chaka Store";
+    const message = `Halo Admin Chaka Store, saya ingin memesan: ${productName}.
+
+Mohon info harga dan ketersediaannya. Terima kasih!`;
+    if (button.dataset.order === "whatsapp") {
+      const url = `https://wa.me/${CHAKA_WA_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(message);
+      alert(`Pesan untuk ${productName} sudah disalin. Tempelkan pesan tersebut di Discord Support setelah server terbuka.`);
+    } catch (error) {
+      alert(`Produk yang dipilih: ${productName}. Saat Discord terbuka, sampaikan bahwa kamu ingin memesan produk ini.`);
+    }
+    window.open(CHAKA_DISCORD_SUPPORT, "_blank", "noopener,noreferrer");
+  });
+});
+</script>
 </body>
 </html>
