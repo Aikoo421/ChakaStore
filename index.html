@@ -148,77 +148,111 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
 </script>
 
 
-<!-- Pemutar Chaka Store: hanya tombol menuju tiga tautan Spotify asli yang diberikan pengguna.
-     Embed alternatif yang memverifikasi ketiga rekaman identik belum dapat dipastikan, jadi
-     tidak mengganti lagu dengan versi lain atau menyematkan track yang belum terverifikasi. -->
+<!-- Pemutar Musik Chaka Store: memutar tepat tiga file MP3 yang disediakan pengguna -->
 <style>
   .music-player {
-    position: fixed; right: 18px; bottom: 18px; z-index: 9999;
-    width: min(340px, calc(100vw - 28px)); box-sizing: border-box;
-    padding: 15px; border: 1px solid rgba(190,150,255,.24);
-    border-radius: 18px; background: rgba(18,15,25,.96);
-    color: #f7f1ff; box-shadow: 0 12px 38px rgba(0,0,0,.38);
-    backdrop-filter: blur(14px); font-family: inherit;
+    position:fixed; right:18px; bottom:18px; z-index:9999;
+    width:min(360px,calc(100vw - 28px)); box-sizing:border-box;
+    padding:15px; border:1px solid rgba(190,150,255,.24);
+    border-radius:18px; background:rgba(18,15,25,.97); color:#f7f1ff;
+    box-shadow:0 12px 38px rgba(0,0,0,.38); backdrop-filter:blur(14px);
+    font-family:inherit;
   }
-  .music-player * { box-sizing: border-box; }
-  .music-info { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
-  .music-title { font-weight:800; font-size:14px; }
-  .music-subtitle { color:#b9adca; font-size:11px; line-height:1.45; }
-  .music-track-buttons { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
-  .music-track-button, .music-open-button {
-    appearance:none; border:1px solid rgba(220,200,255,.2);
-    color:#f8f3ff; background:#211a2a; border-radius:11px;
-    padding:10px 7px; font:inherit; font-size:12px; font-weight:700;
-    cursor:pointer; text-align:center; text-decoration:none;
-    transition:background .15s ease,border-color .15s ease,transform .15s ease;
+  .music-player * {box-sizing:border-box}
+  .music-player .music-info {display:flex; flex-direction:column; gap:5px; margin-bottom:12px}
+  .music-player .music-title {font-weight:850; font-size:14px; line-height:1.4}
+  .music-player .music-subtitle {color:#b9adca; font-size:11px; line-height:1.45}
+  .music-player .music-progress {width:100%; margin:2px 0 10px; accent-color:#b85cff; cursor:pointer}
+  .music-player .music-controls {display:grid; grid-template-columns:44px 1fr 44px; gap:8px; align-items:center}
+  .music-player .music-control {
+    appearance:none; min-height:42px; border:1px solid rgba(220,200,255,.2);
+    color:#f8f3ff; background:#211a2a; border-radius:12px;
+    padding:9px 8px; font:inherit; font-size:13px; font-weight:800;
+    cursor:pointer;
   }
-  .music-track-button:hover, .music-open-button:hover { background:#30213f; border-color:#a23bff; }
-  .music-track-button[aria-pressed="true"] { background:#35164d; border-color:#b85cff; }
-  .music-open-button { display:block; width:100%; margin-top:9px; background:#6e20a6; border-color:#a23bff; }
-  .music-player .music-note { display:block; margin-top:8px; color:#a99bb9; font-size:10px; line-height:1.4; }
+  .music-player .music-control.play {background:linear-gradient(120deg,#ff3159,#a23bff); border:0}
+  .music-player .music-control:hover {filter:brightness(1.14)}
+  .music-player .music-track-buttons {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; margin-top:10px}
+  .music-player .music-track-button {
+    appearance:none; min-width:0; border:1px solid rgba(220,200,255,.2);
+    color:#f8f3ff; background:#211a2a; border-radius:10px; padding:9px 5px;
+    font:inherit; font-size:11px; font-weight:750; cursor:pointer;
+  }
+  .music-player .music-track-button[aria-pressed="true"] {background:#35164d; border-color:#b85cff}
+  .music-player .music-note {display:block; margin-top:9px; color:#a99bb9; font-size:10px; line-height:1.45}
   @media(max-width:520px) {
-    .music-player { right:12px; bottom:12px; width:min(340px,calc(100vw - 24px)); padding:12px; }
+    .music-player {right:12px; bottom:12px; width:min(360px,calc(100vw - 24px)); padding:12px}
   }
 </style>
-<div class="music-player" role="region" aria-label="Pilihan musik Chaka Store">
+<div class="music-player" role="region" aria-label="Pemutar tiga lagu Chaka Store">
   <div class="music-info">
     <span class="music-title">♫ Musik Chaka Store</span>
-    <span class="music-subtitle" id="music-status" aria-live="polite">Pilih lagu, lalu tekan tombol untuk membukanya di Spotify.</span>
+    <span class="music-subtitle" id="music-status" aria-live="polite">Pilih salah satu dari 3 lagu, lalu tekan Play.</span>
+  </div>
+  <audio id="chaka-audio" preload="metadata"></audio>
+  <input class="music-progress" id="music-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posisi lagu">
+  <div class="music-controls">
+    <button class="music-control" id="music-prev" type="button" aria-label="Lagu sebelumnya">⏮</button>
+    <button class="music-control play" id="music-play" type="button">▶ Play</button>
+    <button class="music-control" id="music-next" type="button" aria-label="Lagu berikutnya">⏭</button>
   </div>
   <div class="music-track-buttons">
     <button class="music-track-button" type="button" data-track="0" aria-pressed="true">Lagu 1</button>
     <button class="music-track-button" type="button" data-track="1" aria-pressed="false">Lagu 2</button>
     <button class="music-track-button" type="button" data-track="2" aria-pressed="false">Lagu 3</button>
   </div>
-  <a class="music-open-button" id="music-open" href="https://open.spotify.com/track/0LUEM4bPQ9uX79SXfg8KAE" target="_blank" rel="noopener noreferrer">▶ Buka lagu di Spotify</a>
-  <span class="music-note">Musik dimulai setelah kamu menekan tombol. Pemutaran dilakukan di Spotify agar tidak muncul kotak embed yang diblokir.</span>
+  <span class="music-note">Hanya 3 file MP3 yang disertakan. Lagu berikutnya diputar otomatis setelah lagu selesai. Browser memerlukan klik Play untuk memulai audio.</span>
 </div>
 <script>
 (() => {
   const tracks = [
-    { label: "Lagu 1", url: "https://open.spotify.com/track/0LUEM4bPQ9uX79SXfg8KAE" },
-    { label: "Lagu 2", url: "https://open.spotify.com/track/1Ekl9OLJlijB0Tl8UAaBq4" },
-    { label: "Lagu 3", url: "https://open.spotify.com/track/6HLjAjyWfSs4TVE5rzKwGe" }
+    { title: "BREAKBEAT AFTERSHOCK SHELTER — Pelik Pungki", src: "lagu-1.mp3" },
+    { title: "DJ IN YOUR EYES — DJ Mariana Lopes Carvalho", src: "lagu-2.mp3" },
+    { title: "Black Hole — DJ Teloor", src: "lagu-3.mp3" }
   ];
+  const audio = document.getElementById("chaka-audio");
   const status = document.getElementById("music-status");
-  const openButton = document.getElementById("music-open");
-  const trackButtons = document.querySelectorAll(".music-track-button");
+  const playButton = document.getElementById("music-play");
+  const progress = document.getElementById("music-progress");
+  const trackButtons = [...document.querySelectorAll(".music-track-button")];
+  let current = 0;
 
-  function selectTrack(index) {
-    const track = tracks[index];
-    if (!track) return;
-    openButton.href = track.url;
-    openButton.textContent = "▶ Buka " + track.label + " di Spotify";
-    status.textContent = track.label + " dipilih. Tekan tombol ungu untuk mulai mendengarkan.";
-    trackButtons.forEach((button, i) => {
-      button.setAttribute("aria-pressed", String(i === index));
-    });
+  function loadTrack(index, autoplay = false) {
+    current = (index + tracks.length) % tracks.length;
+    audio.src = tracks[current].src;
+    status.textContent = tracks[current].title;
+    trackButtons.forEach((button, i) => button.setAttribute("aria-pressed", String(i === current)));
+    progress.value = 0;
+    if (autoplay) {
+      audio.play().then(() => { playButton.textContent = "❚❚ Pause"; })
+        .catch(() => { playButton.textContent = "▶ Play"; status.textContent = "Tekan Play untuk memulai: " + tracks[current].title; });
+    } else {
+      playButton.textContent = "▶ Play";
+    }
   }
-
-  trackButtons.forEach((button) => {
-    button.addEventListener("click", () => selectTrack(Number(button.dataset.track)));
+  playButton.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play().then(() => { playButton.textContent = "❚❚ Pause"; })
+        .catch(() => { status.textContent = "File audio tidak ditemukan. Ekstrak semua file dari ZIP ke folder yang sama."; });
+    } else {
+      audio.pause();
+      playButton.textContent = "▶ Play";
+    }
   });
-  selectTrack(0);
+  document.getElementById("music-prev").addEventListener("click", () => loadTrack(current - 1, true));
+  document.getElementById("music-next").addEventListener("click", () => loadTrack(current + 1, true));
+  trackButtons.forEach(button => button.addEventListener("click", () => loadTrack(Number(button.dataset.track), true)));
+  audio.addEventListener("play", () => { playButton.textContent = "❚❚ Pause"; });
+  audio.addEventListener("pause", () => { playButton.textContent = "▶ Play"; });
+  audio.addEventListener("ended", () => loadTrack(current + 1, true));
+  audio.addEventListener("timeupdate", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) progress.value = (audio.currentTime / audio.duration) * 100;
+  });
+  progress.addEventListener("input", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+  });
+  audio.addEventListener("error", () => { status.textContent = "Audio tidak bisa dimuat. Pastikan file MP3 tetap satu folder dengan HTML."; });
+  loadTrack(0);
 })();
 </script>
 
