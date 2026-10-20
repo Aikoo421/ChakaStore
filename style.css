@@ -1,0 +1,56 @@
+
+/* CHAKA STORE — tombol buka/tutup Music Player */
+.music-player .mp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.music-player .mp-toggle {
+  flex-shrink: 0;
+  border: 1px solid #c65cff88;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: linear-gradient(135deg, #35154b, #1c1028);
+  color: #ffd5f1;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 12px #b64dff20;
+}
+
+.music-player .mp-toggle:hover {
+  border-color: #ff78c5;
+  box-shadow: 0 0 16px #c65cff55;
+}
+
+/* Mode ringkas: musik tetap berjalan */
+.music-player.is-collapsed {
+  width: min(290px, calc(100vw - 24px));
+  max-height: none;
+  padding: 12px;
+}
+
+.music-player.is-collapsed > :not(.mp-top) {
+  display: none !important;
+}
+
+.music-player.is-collapsed .mp-status {
+  display: none;
+}
+
+.music-player.is-collapsed .mp-top {
+  margin: 0;
+}
+
+.music-player.is-collapsed .mp-badge {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .music-player.is-collapsed {
+    width: min(250px, calc(100vw - 20px));
+    padding: 10px;
+  }
+}
