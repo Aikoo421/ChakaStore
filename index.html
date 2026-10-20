@@ -50,6 +50,16 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;colo
 @media(max-width:760px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.product-grid{grid-template-columns:1fr}.product-card{padding:19px}.product-art{min-height:95px}}
 
+
+/* Tambahan pemutar musik Chaka Store */
+.music-player{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 28px);padding:12px 15px;border:1px solid #ffffff24;border-radius:18px;background:#100b18ed;backdrop-filter:blur(16px);box-shadow:0 12px 38px #0008}
+.music-player .music-info{min-width:0}
+.music-player .music-title{display:block;color:#fbf8ff;font-size:12px;font-weight:850;white-space:nowrap}
+.music-player .music-subtitle{display:block;margin-top:4px;color:#b4aabb;font-size:10px}
+.music-player button{flex:0 0 auto;width:40px;height:40px;border:0;border-radius:50%;background:linear-gradient(135deg,#ff3159,#a23bff);color:white;font-size:16px;font-weight:900;cursor:pointer}
+.music-player button:hover{filter:brightness(1.12);transform:scale(1.04)}
+@media(max-width:520px){.music-player{right:12px;bottom:12px;padding:10px 12px}.music-player .music-subtitle{font-size:9px}}
+
 </style>
 </head>
 <body>
@@ -94,7 +104,6 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;colo
     <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
   </article>
 </div>
-<div class="product-note">Harga pada kartu masih berupa placeholder, bukan harga resmi. Ubah nama, deskripsi, dan harga sesuai katalog aktual sebelum website dipublikasikan.</div>
 </section>
 <section class="section" id="akses">
 <div class="section-head"><div><div class="kicker">Quick access</div><h2>Pilih tujuanmu.</h2></div><p>Pilih tujuan yang kamu butuhkan: akses Chaka Store atau kunjungi komunitas gaming kami.</p></div>
@@ -137,5 +146,51 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
   });
 });
 </script>
+
+<!-- Tambahan pemutar lagu tenang dengan vokal. Simpan lagu yang kamu punya izin gunakan sebagai "lagu-tenang.mp3" di folder yang sama dengan file HTML. -->
+<div class="music-player" role="group" aria-label="Pemutar musik Chaka Store">
+  <div class="music-info">
+    <span class="music-title">♫ Musik Chaka Store</span>
+    <span class="music-subtitle" id="music-status">Lagu tenang • tekan putar</span>
+  </div>
+  <button id="music-toggle" type="button" aria-label="Putar musik" title="Putar atau jeda musik">▶</button>
+  <audio id="chaka-music" src="lagu-tenang.mp3" preload="none" loop></audio>
+</div>
+<script>
+(() => {
+  const audio = document.getElementById("chaka-music");
+  const button = document.getElementById("music-toggle");
+  const status = document.getElementById("music-status");
+
+  button.addEventListener("click", async () => {
+    if (audio.paused) {
+      try {
+        await audio.play();
+        button.textContent = "Ⅱ";
+        button.setAttribute("aria-label", "Jeda musik");
+        status.textContent = "Sedang diputar";
+      } catch (error) {
+        status.textContent = "Tambahkan file lagu-tenang.mp3";
+      }
+    } else {
+      audio.pause();
+      button.textContent = "▶";
+      button.setAttribute("aria-label", "Putar musik");
+      status.textContent = "Musik dijeda";
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    button.textContent = "▶";
+    button.setAttribute("aria-label", "Putar musik");
+    status.textContent = "Lagu selesai";
+  });
+
+  audio.addEventListener("error", () => {
+    status.textContent = "Tambahkan file lagu-tenang.mp3";
+  });
+})();
+</script>
+
 </body>
 </html>
