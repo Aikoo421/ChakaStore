@@ -140,171 +140,66 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
 </script>
 
 
-<!-- Pemutar Musik Chaka Store: hanya tiga MP3 dari folder/repo yang sama -->
+<!-- Chaka Store Music Player PRO: tetap memakai tiga MP3 di root repository -->
 <style>
-.music-player{position:fixed;right:16px;bottom:16px;z-index:9999;width:min(360px,calc(100vw - 24px));padding:14px;border:1px solid #ffffff2b;border-radius:20px;background:rgba(18,13,27,.98);color:#fbf8ff;box-shadow:0 14px 44px #0009;backdrop-filter:blur(16px);font-family:inherit}
-.music-player *{box-sizing:border-box}
-.music-player .music-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
-.music-player .music-title{font-weight:850;font-size:14px;line-height:1.4}
-.music-player .music-subtitle{display:block;margin-top:5px;color:#c6b9d5;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
-.music-player .music-badge{flex:none;font-size:10px;color:#d8b5ff;border:1px solid #a23bff55;border-radius:999px;padding:5px 7px}
-.music-player .music-progress{display:block;width:100%;margin:8px 0 12px;accent-color:#b85cff;cursor:pointer}
-.music-player .music-time{display:flex;justify-content:space-between;color:#b9adca;font-size:10px;margin-top:-8px;margin-bottom:9px}
-.music-player .music-controls{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}
-.music-player .music-control{min-width:0;min-height:42px;border:1px solid #ffffff24;color:#f8f3ff;background:#211a2a;border-radius:12px;padding:9px 6px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
-.music-player .music-control.play{background:linear-gradient(120deg,#ff3159,#a23bff);border:0}
-.music-player .music-control:focus-visible,.music-player .music-track-button:focus-visible{outline:2px solid #d8b5ff;outline-offset:2px}
-.music-player .music-track-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}
-.music-player .music-track-button{min-width:0;border:1px solid #ffffff24;color:#f8f3ff;background:#211a2a;border-radius:10px;padding:9px 4px;font:inherit;font-size:11px;font-weight:750;cursor:pointer}
-.music-player .music-track-button[aria-pressed="true"]{background:#35164d;border-color:#b85cff}
-.music-player .music-note{display:block;margin-top:10px;color:#a99bb9;font-size:10px;line-height:1.5}
-@media(max-width:520px){.music-player{right:12px;bottom:12px;width:calc(100vw - 24px);padding:12px}.music-player .music-title{font-size:13px}.music-player .music-subtitle{font-size:10px}}
+.music-player{--mp-pink:#ff3478;--mp-purple:#b64dff;position:fixed;right:16px;bottom:16px;z-index:9999;width:min(390px,calc(100vw - 24px));max-height:min(82vh,760px);overflow:auto;padding:15px;border:1px solid #c77bff55;border-radius:23px;background:linear-gradient(145deg,rgba(23,15,35,.98),rgba(12,10,21,.98));color:#fbf7ff;box-shadow:0 18px 55px #000b,0 0 30px #a23bff20;backdrop-filter:blur(18px);font-family:inherit;scrollbar-width:thin;scrollbar-color:#713e91 transparent}
+.music-player *{box-sizing:border-box}.music-player button,.music-player input{font:inherit}.music-player button{cursor:pointer}.music-player .mp-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.music-player .mp-brand{font-size:14px;font-weight:850;letter-spacing:.2px}.music-player .mp-status{display:block;margin-top:4px;color:#c4b5d5;font-size:10px;line-height:1.45;overflow-wrap:anywhere}.music-player .mp-badge{white-space:nowrap;border:1px solid #c65cff77;border-radius:999px;padding:5px 8px;color:#e2c4ff;font-size:10px}
+.music-player .mp-art-row{display:grid;grid-template-columns:105px minmax(0,1fr);gap:13px;align-items:center;margin-bottom:13px}.music-player .mp-cover{position:relative;display:grid;place-items:center;aspect-ratio:1;border-radius:17px;overflow:hidden;background:radial-gradient(circle at 25% 20%,#ff6da5 0,transparent 34%),radial-gradient(circle at 78% 78%,#853bff 0,transparent 44%),linear-gradient(135deg,#27123f,#090812 70%);border:1px solid #ffffff25;box-shadow:0 8px 25px #0007,inset 0 0 25px #f4c7ff14}.music-player .mp-cover:before,.music-player .mp-cover:after{content:"";position:absolute;width:74%;aspect-ratio:1;border:1px solid #f5d9ff65;border-radius:50%;transform:rotate(-25deg) scaleY(.42)}.music-player .mp-cover:after{width:52%;border-color:#ff72b777;transform:rotate(45deg) scaleY(.7)}.music-player .mp-cover-glyph{position:relative;z-index:1;font-size:34px;font-weight:900;text-shadow:0 0 22px #ff55ce}.music-player .mp-track-title{font-size:13px;font-weight:850;line-height:1.4;overflow-wrap:anywhere}.music-player .mp-artist{margin-top:5px;color:#c7b4dc;font-size:10px;line-height:1.4}.music-player .mp-playing{display:inline-flex;align-items:center;gap:3px;margin-top:9px;color:#ff9ed0;font-size:9px;letter-spacing:1px;text-transform:uppercase}.music-player .mp-playing i{display:block;width:3px;height:10px;border-radius:4px;background:linear-gradient(#ff70b4,#b957ff);animation:mp-eq .65s ease-in-out infinite alternate}.music-player .mp-playing i:nth-child(2){height:16px;animation-delay:-.4s}.music-player .mp-playing i:nth-child(3){height:7px;animation-delay:-.2s}.music-player .mp-playing i:nth-child(4){height:13px;animation-delay:-.5s}.music-player:not(.is-playing) .mp-playing i{animation-play-state:paused;transform:scaleY(.3)}@keyframes mp-eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.music-player .mp-visualizer{display:block;width:100%;height:54px;margin:0 0 2px;border-radius:12px;background:linear-gradient(90deg,#ff34780b,#b64dff13);border:1px solid #ffffff0d}.music-player .mp-range{display:block;width:100%;margin:8px 0;accent-color:#c65cff;cursor:pointer}.music-player .mp-times{display:flex;justify-content:space-between;color:#b9adca;font-size:10px}.music-player .mp-controls{display:grid;grid-template-columns:39px 39px minmax(0,1fr) 39px 39px;gap:6px;align-items:center;margin-top:12px}.music-player .mp-btn{min-width:0;min-height:38px;border:1px solid #ffffff24;color:#f8f3ff;background:#211a2a;border-radius:11px;padding:7px 4px;font-size:12px;font-weight:800}.music-player .mp-btn.primary{background:linear-gradient(115deg,var(--mp-pink),var(--mp-purple));border:0;box-shadow:0 5px 18px #b64dff28}.music-player .mp-btn.active{border-color:#ff79c5;color:#ffb3db;background:#421b48}.music-player .mp-volume{display:grid;grid-template-columns:40px minmax(0,1fr) 32px;align-items:center;gap:8px;margin-top:12px;color:#cdbddd;font-size:10px}.music-player .mp-volume input{width:100%;accent-color:#ff62b3}.music-player .mp-section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:15px 0 7px;font-size:11px;font-weight:800;letter-spacing:.3px}.music-player .mp-mode{display:flex;gap:6px}.music-player .mp-mode .mp-btn{min-height:28px;padding:4px 8px;font-size:10px}.music-player .mp-playlist{display:grid;gap:6px}.music-player .mp-item{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:9px;width:100%;padding:8px;border:1px solid #ffffff12;border-radius:12px;text-align:left;background:#ffffff06;color:#f7efff}.music-player .mp-item[aria-current="true"]{border-color:#c05bff99;background:linear-gradient(90deg,#a23bff21,#ff347811)}.music-player .mp-item-num{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:#ffffff0c;color:#d9b8ff;font-size:10px;font-weight:850}.music-player .mp-item-name{font-size:10px;font-weight:750;line-height:1.35;overflow-wrap:anywhere}.music-player .mp-item-artist{display:block;margin-top:3px;color:#a99ab8;font-size:9px;font-weight:500}.music-player .mp-item-time{color:#b7a4c9;font-size:9px}.music-player .mp-note{display:block;margin-top:10px;color:#9586a7;font-size:9px;line-height:1.5}.music-player button:focus-visible,.music-player input:focus-visible{outline:2px solid #e0b0ff;outline-offset:2px}
+@media(max-width:520px){.music-player{right:10px;bottom:10px;width:calc(100vw - 20px);padding:12px;max-height:78vh;border-radius:19px}.music-player .mp-art-row{grid-template-columns:88px minmax(0,1fr);gap:11px}.music-player .mp-controls{grid-template-columns:34px 34px minmax(0,1fr) 34px 34px;gap:5px}.music-player .mp-btn{min-height:36px;font-size:11px}.music-player .mp-visualizer{height:43px}}
+@media(prefers-reduced-motion:reduce){.music-player .mp-playing i{animation:none}}
 </style>
-
-<div class="music-player" role="region" aria-label="Pemutar tiga lagu Chaka Store">
-  <div class="music-head">
-    <div>
-      <span class="music-title">♫ Musik Chaka Store</span>
-      <span class="music-subtitle" id="music-status" aria-live="polite">Pilih lagu lalu tekan Play.</span>
-    </div>
-    <span class="music-badge">3 lagu</span>
-  </div>
-  <audio id="chaka-audio" preload="metadata" playsinline></audio>
-  <input class="music-progress" id="music-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posisi lagu">
-  <div class="music-time"><span id="music-current-time">0:00</span><span id="music-duration">0:00</span></div>
-  <div class="music-controls">
-    <button class="music-control" id="music-prev" type="button" aria-label="Lagu sebelumnya">⏮</button>
-    <button class="music-control play" id="music-play" type="button">▶ Play</button>
-    <button class="music-control" id="music-next" type="button" aria-label="Lagu berikutnya">⏭</button>
-  </div>
-  <div class="music-track-buttons">
-    <button class="music-track-button" type="button" data-track="0" aria-pressed="true">Lagu 1</button>
-    <button class="music-track-button" type="button" data-track="1" aria-pressed="false">Lagu 2</button>
-    <button class="music-track-button" type="button" data-track="2" aria-pressed="false">Lagu 3</button>
-  </div>
-  <span class="music-note">Hanya 3 lagu yang terdaftar. Lagu berikutnya diputar otomatis setelah lagu selesai.</span>
+<div class="music-player" id="chaka-music-player" role="region" aria-label="Music Player PRO Chaka Store">
+  <div class="mp-top"><div><div class="mp-brand">♫ CHAKA MUSIC <span style="color:#d18cff">PRO</span></div><span class="mp-status" id="music-status" aria-live="polite">Pilih lagu lalu tekan Play.</span></div><span class="mp-badge">3 TRACKS</span></div>
+  <div class="mp-art-row"><div class="mp-cover" id="mp-cover" aria-label="Cover album"><span class="mp-cover-glyph" id="mp-cover-glyph">♫</span></div><div><div class="mp-track-title" id="mp-track-title">BREAKBEAT AFTERSHOCK SHELTER</div><div class="mp-artist" id="mp-artist">Pelik Pungki</div><span class="mp-playing" aria-hidden="true"><i></i><i></i><i></i><i></i><span style="margin-left:4px">NOW PLAYING</span></span></div></div>
+  <canvas class="mp-visualizer" id="mp-visualizer" aria-label="Visualizer audio neon"></canvas>
+  <audio id="chaka-audio" preload="metadata" playsinline crossorigin="anonymous"></audio>
+  <input class="mp-range" id="music-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posisi lagu">
+  <div class="mp-times"><span id="music-current-time">0:00</span><span id="music-duration">0:00</span></div>
+  <div class="mp-controls"><button class="mp-btn" id="music-shuffle" type="button" aria-label="Acak lagu" aria-pressed="false" title="Shuffle">🔀</button><button class="mp-btn" id="music-prev" type="button" aria-label="Lagu sebelumnya" title="Sebelumnya">⏮</button><button class="mp-btn primary" id="music-play" type="button">▶ Play</button><button class="mp-btn" id="music-next" type="button" aria-label="Lagu berikutnya" title="Berikutnya">⏭</button><button class="mp-btn" id="music-repeat" type="button" aria-label="Mode repeat" aria-pressed="false" title="Repeat">↻</button></div>
+  <label class="mp-volume"><span>🔊 Volume</span><input id="music-volume" type="range" min="0" max="1" value="0.75" step="0.01" aria-label="Volume musik"><span id="music-volume-label">75%</span></label>
+  <div class="mp-section-head"><span>DAFTAR PUTAR</span><span style="color:#bda3d4;font-weight:500">3 lagu</span></div>
+  <div class="mp-playlist" id="mp-playlist"><button class="mp-item" type="button" data-track="0" aria-current="true"><span class="mp-item-num">01</span><span class="mp-item-name">BREAKBEAT AFTERSHOCK SHELTER<span class="mp-item-artist">Pelik Pungki</span></span><span class="mp-item-time">♫</span></button><button class="mp-item" type="button" data-track="1" aria-current="false"><span class="mp-item-num">02</span><span class="mp-item-name">DJ IN YOUR EYES<span class="mp-item-artist">DJ Mariana Lopes Carvalho</span></span><span class="mp-item-time">♫</span></button><button class="mp-item" type="button" data-track="2" aria-current="false"><span class="mp-item-num">03</span><span class="mp-item-name">Black Hole<span class="mp-item-artist">DJ Teloor</span></span><span class="mp-item-time">♫</span></button></div>
+  <span class="mp-note">Shuffle untuk mengacak lagu. Repeat untuk mengulang lagu aktif. Lagu otomatis lanjut saat selesai.</span>
 </div>
-
 <script>
 (() => {
   "use strict";
-
-  // Nama file harus sama persis dengan file MP3 di root repo GitHub.
   const tracks = [
-    { title: "BREAKBEAT AFTERSHOCK SHELTER — Pelik Pungki", src: "./lagu-1.mp3" },
-    { title: "DJ IN YOUR EYES — DJ Mariana Lopes Carvalho", src: "./lagu-2.mp3" },
-    { title: "Black Hole — DJ Teloor", src: "./lagu-3.mp3" }
+    { title: "BREAKBEAT AFTERSHOCK SHELTER", artist: "Pelik Pungki", src: "./lagu-1.mp3", glyph: "✦", colors: ["#ff3478", "#9e45ff"] },
+    { title: "DJ IN YOUR EYES", artist: "DJ Mariana Lopes Carvalho", src: "./lagu-2.mp3", glyph: "◈", colors: ["#ff4eaa", "#713bff"] },
+    { title: "Black Hole", artist: "DJ Teloor", src: "./lagu-3.mp3", glyph: "◉", colors: ["#9c5bff", "#ff3478"] }
   ];
-
-  const audio = document.getElementById("chaka-audio");
-  const status = document.getElementById("music-status");
-  const playButton = document.getElementById("music-play");
-  const progress = document.getElementById("music-progress");
-  const currentTime = document.getElementById("music-current-time");
-  const duration = document.getElementById("music-duration");
-  const trackButtons = [...document.querySelectorAll(".music-track-button")];
-
-  let current = 0;
-  let playWhenReady = false;
-
-  const formatTime = (seconds) => {
-    if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
-    return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
-  };
-
-  function selectTrack(index, autoplay = false) {
-    current = (index + tracks.length) % tracks.length;
-    playWhenReady = autoplay;
-    audio.pause();
-    audio.src = tracks[current].src;
-    audio.load();
-
-    status.textContent = `Lagu ${current + 1}/3: ${tracks[current].title}`;
-    trackButtons.forEach((button, i) => {
-      button.setAttribute("aria-pressed", String(i === current));
-    });
-    progress.value = 0;
-    currentTime.textContent = "0:00";
-    duration.textContent = "0:00";
-    playButton.textContent = "▶ Play";
-  }
-
-  async function startPlayback() {
-    playWhenReady = true;
-    try {
-      await audio.play();
-    } catch (error) {
-      playWhenReady = false;
-      playButton.textContent = "▶ Play";
-      status.textContent = "Tidak bisa memutar lagu. Periksa koneksi dan pastikan nama file MP3 tepat.";
-    }
-  }
-
-  playButton.addEventListener("click", () => {
-    if (audio.paused) {
-      startPlayback();
-    } else {
-      playWhenReady = false;
-      audio.pause();
-    }
-  });
-
-  document.getElementById("music-prev").addEventListener("click", () => {
-    selectTrack(current - 1, true);
-  });
-
-  document.getElementById("music-next").addEventListener("click", () => {
-    selectTrack(current + 1, true);
-  });
-
-  trackButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      selectTrack(Number(button.dataset.track), true);
-    });
-  });
-
-  audio.addEventListener("canplay", () => {
-    if (playWhenReady) startPlayback();
-  });
-
-  audio.addEventListener("play", () => {
-    playButton.textContent = "❚❚ Pause";
-    status.textContent = `Memutar: ${tracks[current].title}`;
-  });
-
-  audio.addEventListener("pause", () => {
-    playButton.textContent = "▶ Play";
-  });
-
-  audio.addEventListener("loadedmetadata", () => {
-    duration.textContent = formatTime(audio.duration);
-  });
-
-  audio.addEventListener("timeupdate", () => {
-    if (Number.isFinite(audio.duration) && audio.duration > 0) {
-      progress.value = (audio.currentTime / audio.duration) * 100;
-    }
-    currentTime.textContent = formatTime(audio.currentTime);
-  });
-
-  progress.addEventListener("input", () => {
-    if (Number.isFinite(audio.duration) && audio.duration > 0) {
-      audio.currentTime = (Number(progress.value) / 100) * audio.duration;
-    }
-  });
-
-  audio.addEventListener("ended", () => {
-    // Loop hanya di antara tiga lagu ini.
-    selectTrack(current + 1, true);
-  });
-
-  audio.addEventListener("error", () => {
-    playWhenReady = false;
-    playButton.textContent = "▶ Play";
-    status.textContent = `File tidak dapat dimuat: ${tracks[current].src}. Cek nama file di GitHub.`;
-  });
-
-  selectTrack(0, false);
+  const $ = (id) => document.getElementById(id);
+  const player = $("chaka-music-player"), audio = $("chaka-audio"), status = $("music-status"), playButton = $("music-play");
+  const progress = $("music-progress"), currentTime = $("music-current-time"), duration = $("music-duration");
+  const titleEl = $("mp-track-title"), artistEl = $("mp-artist"), cover = $("mp-cover"), glyph = $("mp-cover-glyph");
+  const playlistButtons = [...document.querySelectorAll("#mp-playlist [data-track]")];
+  const shuffleButton = $("music-shuffle"), repeatButton = $("music-repeat"), volume = $("music-volume");
+  let current = 0, shuffle = false, repeat = false, playWhenReady = false, audioContext = null, analyser = null, sourceNode = null, visualFrame = 0;
+  const formatTime = (s) => Number.isFinite(s) && s >= 0 ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2,"0")}` : "0:00";
+  function updateModes(){ shuffleButton.classList.toggle("active",shuffle); shuffleButton.setAttribute("aria-pressed",String(shuffle)); repeatButton.classList.toggle("active",repeat); repeatButton.setAttribute("aria-pressed",String(repeat)); }
+  function updateTrackUI(){ const t=tracks[current]; titleEl.textContent=t.title; artistEl.textContent=t.artist; glyph.textContent=t.glyph; cover.style.background=`radial-gradient(circle at 25% 20%, ${t.colors[0]} 0, transparent 34%),radial-gradient(circle at 78% 78%,${t.colors[1]} 0,transparent 44%),linear-gradient(135deg,#27123f,#090812 70%)`; playlistButtons.forEach((b,i)=>{b.setAttribute("aria-current",String(i===current)); const n=b.querySelector(".mp-item-num"); if(n)n.textContent=i===current&& !audio.paused?"♫":String(i+1).padStart(2,"0");}); }
+  function selectTrack(index,autoplay=false){ current=(index+tracks.length)%tracks.length; playWhenReady=autoplay; audio.pause(); audio.src=tracks[current].src; audio.load(); updateTrackUI(); status.textContent=`Lagu ${current+1}/3 · ${tracks[current].title} — ${tracks[current].artist}`; progress.value=0; currentTime.textContent="0:00"; duration.textContent="0:00"; playButton.textContent="▶ Play"; player.classList.remove("is-playing"); }
+  function nextIndex(){ if(shuffle && tracks.length>1){let n=current;while(n===current)n=Math.floor(Math.random()*tracks.length);return n;}return (current+1)%tracks.length; }
+  function setupVisualizer(){ const canvas=$("mp-visualizer"),ctx=canvas.getContext("2d"); if(!ctx)return; const draw=()=>{visualFrame=requestAnimationFrame(draw); const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2); const w=Math.max(1,Math.floor(rect.width*dpr)),h=Math.max(1,Math.floor(rect.height*dpr)); if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;} ctx.clearRect(0,0,w,h); const bars=48,gap=2*dpr,bw=(w-gap*(bars-1))/bars; let data=null;if(analyser&& !audio.paused){data=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(data);} for(let i=0;i<bars;i++){let amp=data?data[Math.floor(i*data.length/bars)]/255:(audio.paused?.08:.12+Math.abs(Math.sin(Date.now()/210+i*.66))*.5);let bh=Math.max(2*dpr,amp*(h*.88));let x=i*(bw+gap),y=(h-bh)/2;let grad=ctx.createLinearGradient(0,y,0,y+bh);grad.addColorStop(0,"#ff69b4");grad.addColorStop(1,"#9c4dff");ctx.fillStyle=grad;ctx.globalAlpha=audio.paused?.45:.95;ctx.beginPath();const r=Math.min(bw/2,2*dpr);ctx.roundRect?ctx.roundRect(x,y,bw,bh,r):ctx.rect(x,y,bw,bh);ctx.fill();}ctx.globalAlpha=1;};draw(); }
+  async function ensureAudioGraph(){ if(!audioContext){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;try{audioContext=new AC();analyser=audioContext.createAnalyser();analyser.fftSize=128;analyser.smoothingTimeConstant=.78;sourceNode=audioContext.createMediaElementSource(audio);sourceNode.connect(analyser);analyser.connect(audioContext.destination);}catch(e){audioContext=null;analyser=null;}} if(audioContext&&audioContext.state==="suspended")try{await audioContext.resume();}catch(e){} }
+  async function startPlayback(){playWhenReady=true;try{await ensureAudioGraph();await audio.play();}catch(error){playWhenReady=false;playButton.textContent="▶ Play";status.textContent="Tidak bisa memutar lagu. Pastikan file MP3 tersedia di GitHub.";}}
+  playButton.addEventListener("click",()=>{if(audio.paused)startPlayback();else{playWhenReady=false;audio.pause();}});
+  $("music-prev").addEventListener("click",()=>selectTrack(current-1,true)); $("music-next").addEventListener("click",()=>selectTrack(nextIndex(),true));
+  playlistButtons.forEach(b=>b.addEventListener("click",()=>selectTrack(Number(b.dataset.track),true)));
+  shuffleButton.addEventListener("click",()=>{shuffle=!shuffle;updateModes();status.textContent=shuffle?"Shuffle aktif · lagu berikutnya diacak.":`Lagu ${current+1}/3 · ${tracks[current].title}`;});
+  repeatButton.addEventListener("click",()=>{repeat=!repeat;audio.loop=repeat;updateModes();status.textContent=repeat?"Repeat aktif · lagu ini akan diulang.":`Lagu ${current+1}/3 · ${tracks[current].title}`;});
+  volume.addEventListener("input",()=>{audio.volume=Number(volume.value);$("music-volume-label").textContent=`${Math.round(audio.volume*100)}%`;}); audio.volume=Number(volume.value);
+  audio.addEventListener("play",()=>{playButton.textContent="❚❚ Pause";status.textContent=`Memutar: ${tracks[current].title} — ${tracks[current].artist}`;player.classList.add("is-playing");updateTrackUI();});
+  audio.addEventListener("pause",()=>{playButton.textContent="▶ Play";player.classList.remove("is-playing");updateTrackUI();});
+  audio.addEventListener("loadedmetadata",()=>{duration.textContent=formatTime(audio.duration);});
+  audio.addEventListener("timeupdate",()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)progress.value=(audio.currentTime/audio.duration)*100;currentTime.textContent=formatTime(audio.currentTime);});
+  progress.addEventListener("input",()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(progress.value)/100)*audio.duration;});
+  audio.addEventListener("canplay",()=>{if(playWhenReady && audio.paused)startPlayback();});
+  audio.addEventListener("ended",()=>{if(repeat){audio.currentTime=0;startPlayback();return;}selectTrack(nextIndex(),true);});
+  audio.addEventListener("error",()=>{playWhenReady=false;playButton.textContent="▶ Play";player.classList.remove("is-playing");status.textContent=`File tidak dapat dimuat: ${tracks[current].src}. Cek file MP3 di GitHub.`;});
+  updateModes();selectTrack(0,false);setupVisualizer();
 })();
 </script>
 
