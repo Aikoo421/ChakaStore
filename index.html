@@ -51,14 +51,6 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;colo
 @media(max-width:520px){.product-grid{grid-template-columns:1fr}.product-card{padding:19px}.product-art{min-height:95px}}
 
 
-/* Tambahan pemutar musik Chaka Store */
-.music-player{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 28px);padding:12px 15px;border:1px solid #ffffff24;border-radius:18px;background:#100b18ed;backdrop-filter:blur(16px);box-shadow:0 12px 38px #0008}
-.music-player .music-info{min-width:0}
-.music-player .music-title{display:block;color:#fbf8ff;font-size:12px;font-weight:850;white-space:nowrap}
-.music-player .music-subtitle{display:block;margin-top:4px;color:#b4aabb;font-size:10px}
-.music-player button{flex:0 0 auto;width:40px;height:40px;border:0;border-radius:50%;background:linear-gradient(135deg,#ff3159,#a23bff);color:white;font-size:16px;font-weight:900;cursor:pointer}
-.music-player button:hover{filter:brightness(1.12);transform:scale(1.04)}
-@media(max-width:520px){.music-player{right:12px;bottom:12px;padding:10px 12px}.music-player .music-subtitle{font-size:9px}}
 
 </style>
 </head>
@@ -148,11 +140,11 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
 </script>
 
 
-<!-- Pemutar Musik Chaka Store: hanya tiga MP3 lokal -->
+<!-- Pemutar Musik Chaka Store: hanya tiga MP3 dari folder/repo yang sama -->
 <style>
-.music-player{position:fixed;right:18px;bottom:18px;z-index:9999;width:min(360px,calc(100vw - 24px));padding:15px;border:1px solid #ffffff2b;border-radius:20px;background:rgba(18,13,27,.98);color:#fbf8ff;box-shadow:0 14px 44px #0009;backdrop-filter:blur(16px);font-family:inherit}
+.music-player{position:fixed;right:16px;bottom:16px;z-index:9999;width:min(360px,calc(100vw - 24px));padding:14px;border:1px solid #ffffff2b;border-radius:20px;background:rgba(18,13,27,.98);color:#fbf8ff;box-shadow:0 14px 44px #0009;backdrop-filter:blur(16px);font-family:inherit}
 .music-player *{box-sizing:border-box}
-.music-player .music-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.music-player .music-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
 .music-player .music-title{font-weight:850;font-size:14px;line-height:1.4}
 .music-player .music-subtitle{display:block;margin-top:5px;color:#c6b9d5;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
 .music-player .music-badge{flex:none;font-size:10px;color:#d8b5ff;border:1px solid #a23bff55;border-radius:999px;padding:5px 7px}
@@ -168,9 +160,13 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
 .music-player .music-note{display:block;margin-top:10px;color:#a99bb9;font-size:10px;line-height:1.5}
 @media(max-width:520px){.music-player{right:12px;bottom:12px;width:calc(100vw - 24px);padding:12px}.music-player .music-title{font-size:13px}.music-player .music-subtitle{font-size:10px}}
 </style>
+
 <div class="music-player" role="region" aria-label="Pemutar tiga lagu Chaka Store">
   <div class="music-head">
-    <div><span class="music-title">♫ Musik Chaka Store</span><span class="music-subtitle" id="music-status" aria-live="polite">Memuat daftar lagu…</span></div>
+    <div>
+      <span class="music-title">♫ Musik Chaka Store</span>
+      <span class="music-subtitle" id="music-status" aria-live="polite">Pilih lagu lalu tekan Play.</span>
+    </div>
     <span class="music-badge">3 lagu</span>
   </div>
   <audio id="chaka-audio" preload="metadata" playsinline></audio>
@@ -186,35 +182,129 @@ Mohon info harga dan ketersediaannya. Terima kasih!`;
     <button class="music-track-button" type="button" data-track="1" aria-pressed="false">Lagu 2</button>
     <button class="music-track-button" type="button" data-track="2" aria-pressed="false">Lagu 3</button>
   </div>
-  <span class="music-note">Pilih lagu lalu tekan Play. Lagu berikutnya berjalan otomatis. Simpan index.html bersama 3 file MP3 di folder yang sama.</span>
+  <span class="music-note">Hanya 3 lagu yang terdaftar. Lagu berikutnya diputar otomatis setelah lagu selesai.</span>
 </div>
+
 <script>
 (() => {
+  "use strict";
+
+  // Nama file harus sama persis dengan file MP3 di root repo GitHub.
   const tracks = [
-    {title:"BREAKBEAT AFTERSHOCK SHELTER — Pelik Pungki",src:"./lagu-1.mp3"},
-    {title:"DJ IN YOUR EYES — DJ Mariana Lopes Carvalho",src:"./lagu-2.mp3"},
-    {title:"Black Hole — DJ Teloor",src:"./lagu-3.mp3"}
+    { title: "BREAKBEAT AFTERSHOCK SHELTER — Pelik Pungki", src: "./lagu-1.mp3" },
+    { title: "DJ IN YOUR EYES — DJ Mariana Lopes Carvalho", src: "./lagu-2.mp3" },
+    { title: "Black Hole — DJ Teloor", src: "./lagu-3.mp3" }
   ];
-  const audio=document.getElementById("chaka-audio"),status=document.getElementById("music-status");
-  const playButton=document.getElementById("music-play"),progress=document.getElementById("music-progress");
-  const currentTime=document.getElementById("music-current-time"),duration=document.getElementById("music-duration");
-  const trackButtons=[...document.querySelectorAll(".music-track-button")];
-  let current=0, userRequestedPlay=false;
-  const fmt=t=>Number.isFinite(t)&&t>=0?`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,"0")}`:"0:00";
-  function selectTrack(index){current=(index+tracks.length)%tracks.length;audio.pause();audio.src=tracks[current].src;audio.load();status.textContent=tracks[current].title;trackButtons.forEach((b,i)=>b.setAttribute("aria-pressed",String(i===current)));progress.value=0;currentTime.textContent="0:00";duration.textContent="0:00";playButton.textContent="▶ Play";}
-  async function play(){userRequestedPlay=true;try{await audio.play();}catch(e){playButton.textContent="▶ Play";if(audio.error){status.textContent="File MP3 tidak ditemukan atau tidak bisa dibaca. Ekstrak ZIP dan simpan semua file dalam satu folder."; }else{status.textContent="Browser menolak pemutaran. Coba tekan Play sekali lagi.";}}}
-  playButton.addEventListener("click",()=>audio.paused?play():audio.pause());
-  document.getElementById("music-prev").addEventListener("click",()=>{selectTrack(current-1);play();});
-  document.getElementById("music-next").addEventListener("click",()=>{selectTrack(current+1);play();});
-  trackButtons.forEach(b=>b.addEventListener("click",()=>{selectTrack(Number(b.dataset.track));play();}));
-  audio.addEventListener("play",()=>{playButton.textContent="❚❚ Pause";status.textContent=tracks[current].title;});
-  audio.addEventListener("pause",()=>{playButton.textContent="▶ Play";});
-  audio.addEventListener("loadedmetadata",()=>{duration.textContent=fmt(audio.duration);});
-  audio.addEventListener("timeupdate",()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)progress.value=audio.currentTime/audio.duration*100;currentTime.textContent=fmt(audio.currentTime);});
-  progress.addEventListener("input",()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=Number(progress.value)/100*audio.duration;});
-  audio.addEventListener("ended",()=>{selectTrack(current+1);play();});
-  audio.addEventListener("error",()=>{playButton.textContent="▶ Play";status.textContent="Audio tidak dapat dimuat. Pastikan lagu-1.mp3, lagu-2.mp3, lagu-3.mp3 satu folder dengan index.html.";});
-  selectTrack(0);
+
+  const audio = document.getElementById("chaka-audio");
+  const status = document.getElementById("music-status");
+  const playButton = document.getElementById("music-play");
+  const progress = document.getElementById("music-progress");
+  const currentTime = document.getElementById("music-current-time");
+  const duration = document.getElementById("music-duration");
+  const trackButtons = [...document.querySelectorAll(".music-track-button")];
+
+  let current = 0;
+  let playWhenReady = false;
+
+  const formatTime = (seconds) => {
+    if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+    return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+  };
+
+  function selectTrack(index, autoplay = false) {
+    current = (index + tracks.length) % tracks.length;
+    playWhenReady = autoplay;
+    audio.pause();
+    audio.src = tracks[current].src;
+    audio.load();
+
+    status.textContent = `Lagu ${current + 1}/3: ${tracks[current].title}`;
+    trackButtons.forEach((button, i) => {
+      button.setAttribute("aria-pressed", String(i === current));
+    });
+    progress.value = 0;
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+    playButton.textContent = "▶ Play";
+  }
+
+  async function startPlayback() {
+    playWhenReady = true;
+    try {
+      await audio.play();
+    } catch (error) {
+      playWhenReady = false;
+      playButton.textContent = "▶ Play";
+      status.textContent = "Tidak bisa memutar lagu. Periksa koneksi dan pastikan nama file MP3 tepat.";
+    }
+  }
+
+  playButton.addEventListener("click", () => {
+    if (audio.paused) {
+      startPlayback();
+    } else {
+      playWhenReady = false;
+      audio.pause();
+    }
+  });
+
+  document.getElementById("music-prev").addEventListener("click", () => {
+    selectTrack(current - 1, true);
+  });
+
+  document.getElementById("music-next").addEventListener("click", () => {
+    selectTrack(current + 1, true);
+  });
+
+  trackButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectTrack(Number(button.dataset.track), true);
+    });
+  });
+
+  audio.addEventListener("canplay", () => {
+    if (playWhenReady) startPlayback();
+  });
+
+  audio.addEventListener("play", () => {
+    playButton.textContent = "❚❚ Pause";
+    status.textContent = `Memutar: ${tracks[current].title}`;
+  });
+
+  audio.addEventListener("pause", () => {
+    playButton.textContent = "▶ Play";
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      progress.value = (audio.currentTime / audio.duration) * 100;
+    }
+    currentTime.textContent = formatTime(audio.currentTime);
+  });
+
+  progress.addEventListener("input", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    // Loop hanya di antara tiga lagu ini.
+    selectTrack(current + 1, true);
+  });
+
+  audio.addEventListener("error", () => {
+    playWhenReady = false;
+    playButton.textContent = "▶ Play";
+    status.textContent = `File tidak dapat dimuat: ${tracks[current].src}. Cek nama file di GitHub.`;
+  });
+
+  selectTrack(0, false);
 })();
 </script>
 
