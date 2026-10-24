@@ -87,6 +87,24 @@
   const audio=$("chaka-audio"), player=$("chaka-music-player");
   if(audio&&player){
     const tracks=[
+
+
+const tracks = [
+  {
+    title: "DJ IN YOUR EYES",
+    artist: "DJ Mariana Lopes Carvalho",
+    src: "music/lagu-2.mp3",
+    glyph: "◈",
+    colors: ["#ff4eaa", "#713bff"]
+  },
+  {
+    title: "Black Hole",
+    artist: "DJ Teloor",
+    src: "music/lagu-3.mp3",
+    glyph: "◉",
+    colors: ["#9c5bff", "#ff3478"]
+  }
+];
       {title:"BREAKBEAT AFTERSHOCK SHELTER",artist:"Pelik Pungki",src:"assets/music/lagu-1.mp3",glyph:"✦",colors:["#ff3478","#9e45ff"]},
       {title:"DJ IN YOUR EYES",artist:"DJ Mariana Lopes Carvalho",src:"assets/music/lagu-2.mp3",glyph:"◈",colors:["#ff4eaa","#713bff"]},
       {title:"Black Hole",artist:"DJ Teloor",src:"assets/music/lagu-3.mp3",glyph:"◉",colors:["#9c5bff","#ff3478"]}
