@@ -13,7 +13,7 @@
 
   
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="gsv3-enabled">
 
@@ -116,8 +116,8 @@
   <div class="mp-controls"><button id="music-prev" type="button" aria-label="Lagu sebelumnya">⏮</button><button id="music-play" type="button" class="mp-main-play">▶ Play</button><button id="music-next" type="button" aria-label="Lagu berikutnya">⏭</button><button id="music-shuffle" type="button" aria-label="Acak lagu" aria-pressed="false">🔀</button><button id="music-repeat" type="button" aria-label="Ulangi lagu" aria-pressed="false">🔁</button></div>
   <div class="mp-volume"><span>🔉</span><input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"></div>
   <div id="mp-playlist" class="mp-playlist">
-    <button type="button" data-track="1"><span class="mp-item-num">02</span><span><strong>DJ IN YOUR EYES</strong><small>DJ Mariana Lopes Carvalho</small></span><span>▶</span></button>
-    <button type="button" data-track="2"><span class="mp-item-num">03</span><span><strong>Black Hole</strong><small>DJ Teloor</small></span><span>▶</span></button>
+    <button type="button" data-track="0"><span class="mp-item-num">02</span><span><strong>DJ IN YOUR EYES</strong><small>DJ Mariana Lopes Carvalho</small></span><span>▶</span></button>
+    <button type="button" data-track="1"><span class="mp-item-num">03</span><span><strong>Black Hole</strong><small>DJ Teloor</small></span><span>▶</span></button>
   </div>
 </section>
 
@@ -137,7 +137,7 @@
   theme?.addEventListener('click',()=>{const on=theme.getAttribute('aria-pressed')!=='true';theme.setAttribute('aria-pressed',String(on));document.body.classList.toggle('gsv3-soft-theme',on);});
   if (location.pathname.includes('/pages/')) { mount.querySelectorAll('a[href="index.html"]').forEach(a=>a.href='../index.html'); mount.querySelectorAll('a[href^="pages/"]').forEach(a=>a.href='../'+a.getAttribute('href')); } }
  catch(e){ console.error(e); if(mount) mount.innerHTML='<p style="padding:12px;color:#ff9ab5">Glassy Sidebar gagal dimuat. Jalankan lewat Live Server.</p>'; }
- const script=document.createElement('script'); script.src=(location.pathname.includes('/pages/') ? '../' : '') + 'assets/js/main.js'; document.body.appendChild(script);
+ const script=document.createElement('script'); script.src=(location.pathname.includes('/pages/') ? '../' : '') + 'js/main.js'; document.body.appendChild(script);
 })();
 </script>
 
