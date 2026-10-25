@@ -1,0 +1,27 @@
+CHAKA STORE — VERSI PERBAIKAN
+
+CARA MENJALANKAN DI WINDOWS / VS CODE
+1. Ekstrak seluruh isi ZIP ke satu folder.
+2. Buka folder CHAKA_STORE_FIXED di VS Code (File > Open Folder).
+3. Pastikan struktur utama:
+   index.html
+   pages/tentang.html, katalog.html, kontak.html, link-akses.html
+   assets/css/style.css
+   assets/js/main.js
+   assets/music/lagu-1.mp3, lagu-2.mp3, lagu-3.mp3
+   components/glassy-sidebar.html
+4. Install extension Live Server bila belum ada.
+5. Klik kanan index.html > Open with Live Server.
+6. Untuk halaman Tentang, buka pages/tentang.html dan klik kanan > Open with Live Server.
+7. Tombol Appearance ada di kanan atas (desktop) atau bagian bawah di layar kecil. Pilih preset/warna lalu klik Simpan warna.
+8. Music Player berada di kiri bawah. Klik Play untuk mulai audio; browser biasanya melarang autoplay sebelum ada klik pengguna.
+
+MUSIK
+Versi ini sudah memasukkan 3 lagu MP3 dari ZIP lagu yang kamu kirim ke assets/music/lagu-1.mp3, lagu-2.mp3, dan lagu-3.mp3. Daftar lagu di index.html dan sumber audio di assets/js/main.js sudah disesuaikan. Jika ingin judul lagu sesuai nama aslinya, ubah title dan artist pada array tracks di assets/js/main.js serta teks playlist di index.html.
+
+GITHUB PAGES
+Unggah isi folder ini ke root repositori, bukan folder hosting berlapis. Pastikan index.html berada di root repositori. Jangan mengunggah folder .venv atau file rahasia/token.
+
+
+FITUR BARU: DIGITAL CLOCK
+Jam digital CHAKA STORE tampil pada halaman beranda, Tentang Kami, Katalog, Link Akses, dan Kontak. Jam mengikuti waktu lokal perangkat pengunjung. CSS dan JavaScript sudah ditambahkan ke css/style.css dan js/main.js.
