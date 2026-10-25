@@ -162,24 +162,24 @@
 </div>
 <!-- End loading screen -->
 <script>
-/* CHAKA STORE homepage loader: robust on mobile and GitHub Pages. */
+/* CHAKA STORE loader: selalu dilepas, termasuk jika resource eksternal gagal. */
 (function () {
-  const screen = document.getElementById('chaka-loading');
+  var screen = document.getElementById('chaka-loading');
   if (!screen) return;
 
-  const bar = document.getElementById('chaka-loading-bar');
-  const label = document.getElementById('chaka-loading-percent');
-  const message = screen.querySelector('.loading-message');
-  const startedAt = Date.now();
-  let progress = 0;
-  let finished = false;
-  let progressTimer = null;
-  let finishTimer = null;
+  var bar = document.getElementById('chaka-loading-bar');
+  var label = document.getElementById('chaka-loading-percent');
+  var message = screen.querySelector('.loading-message');
+  var startedAt = Date.now();
+  var progress = 0;
+  var finished = false;
+  var progressTimer = null;
+  var finishTimer = null;
 
   document.documentElement.classList.add('chaka-loading-active');
 
-  function draw(next) {
-    progress = Math.max(progress, Math.min(100, next));
+  function draw(value) {
+    progress = Math.max(progress, Math.min(100, value));
     if (bar) bar.style.width = progress + '%';
     if (label) label.textContent = Math.floor(progress) + '%';
   }
@@ -189,40 +189,41 @@
     finished = true;
     draw(100);
     if (message) message.textContent = 'WEBSITE SIAP!';
-    clearInterval(progressTimer);
-    clearTimeout(finishTimer);
+    if (progressTimer) clearInterval(progressTimer);
+    if (finishTimer) clearTimeout(finishTimer);
 
-    // Keep 100% briefly so the completed state is visible, then fade out.
+    // Pastikan overlay tidak pernah mengunci halaman terlalu lama.
     setTimeout(function () {
       screen.classList.add('is-hidden');
       document.documentElement.classList.remove('chaka-loading-active');
       setTimeout(function () {
         if (screen.parentNode) screen.parentNode.removeChild(screen);
       }, 500);
-    }, 180);
+    }, 150);
   }
+
+  // Pasang fallback lebih dulu agar tetap berjalan walau load event/resource gagal.
+  finishTimer = setTimeout(finish, 3500);
 
   progressTimer = setInterval(function () {
     if (finished) return;
-    // Progress moves smoothly but never pretends the page is ready too early.
-    const elapsed = Date.now() - startedAt;
-    const target = Math.min(90, 12 + elapsed / 45);
-    draw(target);
+    var elapsed = Date.now() - startedAt;
+    // Bergerak sampai 90% sambil menunggu halaman, lalu fallback menyelesaikan.
+    draw(Math.min(90, 10 + elapsed / 40));
     if (document.readyState === 'complete' && elapsed >= 900) finish();
   }, 80);
 
-  window.addEventListener('load', function () {
-    const wait = Math.max(0, 1100 - (Date.now() - startedAt));
-    setTimeout(finish, wait);
-  }, { once: true });
+  if (document.readyState === 'complete') {
+    setTimeout(finish, Math.max(900 - (Date.now() - startedAt), 0));
+  } else {
+    window.addEventListener('load', function () {
+      setTimeout(finish, Math.max(900 - (Date.now() - startedAt), 0));
+    }, { once: true });
+  }
 
-  // Handles restored pages and slow/broken external resources without trapping users.
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) finish();
   });
-
-  // Safety fallback: never leave the loading screen stuck indefinitely.
-  finishTimer = setTimeout(finish, 4500);
 })();
 </script>
 
