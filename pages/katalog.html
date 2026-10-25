@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09070d">
+<meta name="description" content="Chaka Store — pusat komunitas, layanan digital, produk Discord, game, dan bantuan.">
+<meta property="og:title" content="CHAKA STORE | Digital Hub">
+<meta property="og:description" content="Satu tempat untuk komunitas, produk digital, dan bantuan Chaka Store.">
+<meta property="og:type" content="website">
+<title>Katalog Produk | CHAKA STORE</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg%20xmlns=&quot;http://www.w3.org/2000/svg&quot;%20viewBox=&quot;0%200%2064%2064&quot;&gt;&lt;defs&gt;&lt;linearGradient%20id=&quot;g&quot;%20x1=&quot;0&quot;%20y1=&quot;0&quot;%20x2=&quot;1&quot;%20y2=&quot;1&quot;&gt;&lt;stop%20stop-color=&quot;%23ff3159&quot;/&gt;&lt;stop%20offset=&quot;1&quot;%20stop-color=&quot;%23a23bff&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect%20width=&quot;64&quot;%20height=&quot;64&quot;%20rx=&quot;17&quot;%20fill=&quot;%2309070d&quot;/&gt;&lt;rect%20x=&quot;3&quot;%20y=&quot;3&quot;%20width=&quot;58&quot;%20height=&quot;58&quot;%20rx=&quot;15&quot;%20fill=&quot;none&quot;%20stroke=&quot;url(%23g)&quot;%20stroke-width=&quot;3&quot;/&gt;&lt;text%20x=&quot;32&quot;%20y=&quot;40&quot;%20font-family=&quot;Arial,sans-serif&quot;%20font-weight=&quot;900&quot;%20font-size=&quot;25&quot;%20text-anchor=&quot;middle&quot;%20fill=&quot;white&quot;&gt;CS&lt;/text&gt;&lt;/svg&gt;">
+
+  
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="gsv3-enabled">
+
+<!-- CHAKA STORE: loading screen -->
+<div id="chaka-loading" class="chaka-loading" role="status" aria-live="polite" aria-label="Memuat website">
+  <div class="loading-content">
+    <div class="loading-logo"><span>CS</span></div>
+    <div class="loading-brand">CHAKA <span>STORE</span></div>
+    <div class="loading-subtitle">Development ChakaVN </div>
+    <div class="loading-equalizer" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="loading-message">MENYIAPKAN WEBSITE...</div>
+    <div class="loading-track"><div id="chaka-loading-bar" class="loading-bar"></div></div>
+    <div id="chaka-loading-percent" class="loading-percent">0%</div>
+  </div>
+</div>
+<!-- End loading screen -->
+<script>
+/* CHAKA STORE loader: shared by every page; independent of sidebar and music scripts. */
+(function(){
+  const screen=document.getElementById('chaka-loading');
+  const bar=document.getElementById('chaka-loading-bar');
+  const label=document.getElementById('chaka-loading-percent');
+  if(!screen) return;
+  document.documentElement.classList.add('chaka-loading-active');
+  let value=0, finished=false; const start=Date.now();
+  function draw(n){value=Math.max(value,Math.min(100,n));if(bar)bar.style.width=value+'%';if(label)label.textContent=Math.floor(value)+'%';}
+  function finish(){if(finished)return;finished=true;draw(100);screen.classList.add('is-hidden');document.documentElement.classList.remove('chaka-loading-active');setTimeout(()=>screen.remove(),700);clearInterval(tick);}
+  const tick=setInterval(()=>{const elapsed=Date.now()-start;draw(Math.min(94,elapsed/24));if(elapsed>=2200 && document.readyState!=='loading')finish();if(elapsed>=5000)finish();},70);
+  window.addEventListener('load',()=>setTimeout(finish,Math.max(0,1500-(Date.now()-start))),{once:true});
+  setTimeout(finish,5200);
+})();
+</script>
+
+
+<!-- Glassy Sidebar V3: new navigation; original CHAKA sections/features remain below -->
+
+<div class="gsv3-mobilebar"><button class="gsv3-menu" id="gsv3-menu" aria-label="Buka menu" aria-expanded="false">☰</button><div class="gsv3-mobilebrand">CHAKA <span>STORE</span></div></div>
+<div id="glassy-sidebar-mount"></div>
+
+
+<header><nav class="wrap">
+<a class="brand" href="../index.html" aria-label="Chaka Store beranda"><span class="brand-mark">CS</span><span>CHAKA <span style="color:#ff78a1">STORE</span></span></a>
+<div class="nav-links"><a href="../pages/tentang.html">Tentang</a><a href="../pages/katalog.html">Produk</a><a href="../pages/link-akses.html">Link akses</a><a href="../pages/kontak.html">Kontak</a></div>
+<a class="btn primary" href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Gabung Discord ↗</a>
+</nav></header>
+<main class="wrap">
+<section class="section" id="produk">
+<div class="section-head"><div><div class="kicker">Product catalog</div><h2>Pilih produkmu.</h2></div><p>Pilih produk yang kamu inginkan, lalu lanjutkan pemesanan melalui WhatsApp admin atau Discord Support.</p></div>
+<div class="product-grid">
+  <!-- EDIT PRODUK: ubah nama, deskripsi, ikon, dan harga di setiap kartu di bawah ini. -->
+  <article class="product-card" data-product="Produk Digital 1">
+    <div class="product-art" aria-hidden="true">✨</div><span class="product-tag">Produk digital</span><h3>Produk Digital 1</h3><p>Kami menyiapkan beberapa produk digital premium seperti youtube, chatgpt, spotify dan kebutuhan lain nya.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+  <article class="product-card" data-product="Layanan Discord">
+    <div class="product-art" aria-hidden="true">🎧</div><span class="product-tag">Layanan Discord</span><h3>Layanan Discord</h3><p>Kami menyiapkan beberapa product discord mau dari nitro, decoration, booster, badge account maupun account discord polosan.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+  <article class="product-card" data-product="Produk Game">
+    <div class="product-art" aria-hidden="true">🕹️</div><span class="product-tag">Gaming</span><h3>Produk Game</h3><p>Kami telah menyiapkan beberapa product game dan kebutuhan lain nya.</p><div class="product-price"><small>Harga</small>Hubungi admin</div>
+    <div class="product-actions"><button class="order-btn whatsapp" type="button" data-order="whatsapp">💬 Pesan via WhatsApp</button><button class="order-btn" type="button" data-order="discord">🎮 Pesan via Discord</button></div>
+  </article>
+</div>
+</section>
+</main>
+
+<!-- CHAKA STORE Appearance + Music Player PRO -->
+<button class="chaka-appearance-trigger" id="chaka-appearance-open" type="button" aria-controls="chaka-appearance-panel" aria-expanded="false">🎨 Appearance</button>
+<aside class="chaka-appearance-panel" id="chaka-appearance-panel" hidden aria-label="Pengaturan tampilan">
+  <div class="appearance-head"><div><small>PERSONALISASI</small><h2>Appearance</h2></div><button type="button" id="chaka-appearance-close" class="appearance-x" aria-label="Tutup">×</button></div>
+  <p class="appearance-desc">Atur warna website CHAKA STORE. Perubahan langsung terlihat.</p>
+  <div class="appearance-presets">
+    <button type="button" data-appearance-preset="default">CHAKA</button><button type="button" data-appearance-preset="purple">Purple</button><button type="button" data-appearance-preset="red">Red</button><button type="button" data-appearance-preset="light">Light</button>
+  </div>
+  <div class="appearance-colors">
+    <label>Background <input type="color" data-appearance-color="bg" value="#09070d"></label>
+    <label>Panel / Card <input type="color" data-appearance-color="panel" value="#14101b"></label>
+    <label>Warna teks <input type="color" data-appearance-color="text" value="#fbf8ff"></label>
+    <label>Teks sekunder <input type="color" data-appearance-color="muted" value="#b4aabb"></label>
+    <label>Border <input type="color" data-appearance-color="line" value="#ffffff"></label>
+    <label>Warna utama <input type="color" data-appearance-color="red" value="#ff3159"></label>
+    <label>Pink <input type="color" data-appearance-color="pink" value="#ff78a1"></label>
+    <label>Purple <input type="color" data-appearance-color="purple" value="#a23bff"></label>
+    <label>Link <input type="color" data-appearance-color="link" value="#ff8da8"></label>
+    <label>Tombol <input type="color" data-appearance-color="button" value="#ff3159"></label>
+    <label>Sidebar <input type="color" data-appearance-color="sidebar" value="#0c0812"></label>
+  </div>
+  <label class="opacity-row">Transparansi sidebar <span id="appearance-opacity-value">88%</span><input id="appearance-opacity" type="range" min="40" max="100" value="88"></label>
+  <div class="appearance-actions"><button id="chaka-appearance-reset" type="button">Reset</button><button id="chaka-appearance-save" type="button" class="is-primary">Simpan warna</button></div>
+  <p class="appearance-note" id="appearance-feedback" role="status">Perubahan tersimpan di browser setelah kamu menekan Simpan warna.</p>
+</aside>
+<section class="chaka-music-player" id="chaka-music-player" aria-label="CHAKA Music Player">
+  <div class="mp-top"><div class="mp-brand"><span class="mp-eq">♫</span><div><strong>CHAKA MUSIC</strong><small>PLAYER PRO</small></div></div><button id="music-toggle" class="mp-toggle" type="button" aria-expanded="true">▼ Tutup</button></div>
+  <div class="mp-now"><div class="mp-cover" id="mp-cover"><span id="mp-cover-glyph">✦</span></div><div class="mp-meta"><small>NOW PLAYING</small><strong id="mp-track-title">CHAKA Synthwave</strong><span id="mp-artist">Original demo melody</span><p id="music-status" role="status">Siap diputar · pilih lagu lalu tekan Play</p></div></div>
+  <canvas id="mp-visualizer" class="mp-visualizer" aria-label="Visualisasi musik"></canvas>
+  <audio id="chaka-audio" preload="metadata"></audio>
+  <div class="mp-progress"><span id="music-current-time">0:00</span><input id="music-progress" type="range" min="0" max="100" value="0" aria-label="Posisi lagu"><span id="music-duration">0:00</span></div>
+  <div class="mp-controls"><button id="music-prev" type="button" aria-label="Lagu sebelumnya">⏮</button><button id="music-play" type="button" class="mp-main-play">▶ Play</button><button id="music-next" type="button" aria-label="Lagu berikutnya">⏭</button><button id="music-shuffle" type="button" aria-label="Acak lagu" aria-pressed="false">🔀</button><button id="music-repeat" type="button" aria-label="Ulangi lagu" aria-pressed="false">🔁</button></div>
+  <div class="mp-volume"><span>🔉</span><input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"></div>
+  <div id="mp-playlist" class="mp-playlist">
+    <button type="button" data-track="0"><span class="mp-item-num">01</span><span><strong>Neon Dreams</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+    <button type="button" data-track="0"><span class="mp-item-num">02</span><span><strong>Midnight Pulse</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+    <button type="button" data-track="1"><span class="mp-item-num">03</span><span><strong>Digital Horizon</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+  </div>
+</section>
+
+<footer><div class="wrap footer-inner"><span>© <span id="year"></span> CHAKA STORE. Dibuat untuk memudahkan akses komunitas.</span><div class="footer-links"><a href="https://discord.gg/PDCAgvpPJu" target="_blank" rel="noopener noreferrer">Discord</a><a href="https://discord.gg/hYV749ckgm" target="_blank" rel="noopener noreferrer">Support</a><a href="https://discord.gg/EjPTSJygm3" target="_blank" rel="noopener noreferrer">Produk</a><a href="../index.html">Kembali ke atas ↑</a></div></div></footer>
+<script>
+(async function(){
+ const mount=document.getElementById('glassy-sidebar-mount');
+ try { const response=await fetch('../components/glassy-sidebar.html'); if(!response.ok) throw new Error('Sidebar tidak dapat dimuat'); mount.innerHTML=await response.text();
+  const menu=document.getElementById('gsv3-menu');
+  const sidebar=document.getElementById('gsv3-sidebar');
+  const scrim=document.getElementById('gsv3-scrim');
+  const closeSidebar=()=>{sidebar?.classList.remove('gsv3-open');scrim?.classList.remove('gsv3-show');menu?.setAttribute('aria-expanded','false');};
+  menu?.addEventListener('click',()=>{const opened=sidebar?.classList.toggle('gsv3-open');scrim?.classList.toggle('gsv3-show',!!opened);menu?.setAttribute('aria-expanded',String(!!opened));});
+  scrim?.addEventListener('click',closeSidebar);
+  sidebar?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeSidebar));
+  const theme=document.getElementById('gsv3-theme');
+  theme?.addEventListener('click',()=>{const on=theme.getAttribute('aria-pressed')!=='true';theme.setAttribute('aria-pressed',String(on));document.body.classList.toggle('gsv3-soft-theme',on);});
+  if (location.pathname.includes('/pages/')) { mount.querySelectorAll('a[href="index.html"]').forEach(a=>a.href='../index.html'); mount.querySelectorAll('a[href^="pages/"]').forEach(a=>a.href='../'+a.getAttribute('href')); } }
+ catch(e){ console.error(e); if(mount) mount.innerHTML='<p style="padding:12px;color:#ff9ab5">Glassy Sidebar gagal dimuat. Jalankan lewat Live Server.</p>'; }
+ const script=document.createElement('script'); script.src=(location.pathname.includes('/pages/') ? '../' : '') + 'js/main.js'; document.body.appendChild(script);
+})();
+</script>
+</body></html>
