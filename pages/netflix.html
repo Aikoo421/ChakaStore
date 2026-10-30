@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#09070d" name="theme-color"/>
+<meta content="Chaka Store — pusat komunitas, layanan digital, produk Discord, game, dan bantuan." name="description"/>
+<meta content="CHAKA STORE | Digital Hub" property="og:title"/>
+<meta content="Satu tempat untuk komunitas, produk digital, dan bantuan Chaka Store." property="og:description"/>
+<meta content="website" property="og:type"/>
+<title>Netflix | CHAKA STORE</title>
+<link href='data:image/svg+xml,&lt;svg%20xmlns="http://www.w3.org/2000/svg"%20viewBox="0%200%2064%2064"&gt;&lt;defs&gt;&lt;linearGradient%20id="g"%20x1="0"%20y1="0"%20x2="1"%20y2="1"&gt;&lt;stop%20stop-color="%23ff3159"/&gt;&lt;stop%20offset="1"%20stop-color="%23a23bff"/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect%20width="64"%20height="64"%20rx="17"%20fill="%2309070d"/&gt;&lt;rect%20x="3"%20y="3"%20width="58"%20height="58"%20rx="15"%20fill="none"%20stroke="url(%23g)"%20stroke-width="3"/&gt;&lt;text%20x="32"%20y="40"%20font-family="Arial,sans-serif"%20font-weight="900"%20font-size="25"%20text-anchor="middle"%20fill="white"&gt;CS&lt;/text&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<link href="../css/style.css?v=3" rel="stylesheet"/>
+<style id="chaka-pages-style-fallback">
+
+/* CHAKA STORE — tombol buka/tutup Music Player */
+.music-player .mp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.music-player .mp-toggle {
+  flex-shrink: 0;
+  border: 1px solid #c65cff88;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: linear-gradient(135deg, #35154b, #1c1028);
+  color: #ffd5f1;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 12px #b64dff20;
+}
+
+.music-player .mp-toggle:hover {
+  border-color: #ff78c5;
+  box-shadow: 0 0 16px #c65cff55;
+}
+
+/* Mode ringkas: musik tetap berjalan */
+.music-player.is-collapsed {
+  width: min(290px, calc(100vw - 24px));
+  max-height: none;
+  padding: 12px;
+}
+
+.music-player.is-collapsed > :not(.mp-top) {
+  display: none !important;
+}
+
+.music-player.is-collapsed .mp-status {
+  display: none;
+}
+
+.music-player.is-collapsed .mp-top {
+  margin: 0;
+}
+
+.music-player.is-collapsed .mp-badge {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .music-player.is-collapsed {
+    width: min(250px, calc(100vw - 20px));
+    padding: 10px;
+  }
+}
+
+/* ===== CSS utama CHAKA STORE (dipindahkan dari index.html) ===== */
+:root{--bg:#09070d;--panel:#14101b;--line:#ffffff1c;--text:#fbf8ff;--muted:#b4aabb;--red:#ff3159;--pink:#ff78a1;--purple:#a23bff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 12% 8%,#ff315925,transparent 34%),radial-gradient(ellipse at 90% 40%,#8b39ff20,transparent 38%),#09070d}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.14;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:38px 38px}
+a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1120px,calc(100% - 34px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:#09070ddd;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff0d}
+nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.08em}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--red),var(--purple));box-shadow:0 0 26px #ff315933;font-size:14px}
+.nav-links{display:flex;gap:24px;color:var(--muted);font-size:13px}.nav-links a:hover{color:white}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:13px 18px;font-size:13px;font-weight:800;background:#ffffff08;transition:.2s;cursor:pointer}
+.btn:hover{transform:translateY(-2px);border-color:#ff789188;background:#ff315916}.btn.primary{border:0;background:linear-gradient(110deg,var(--red),var(--purple));box-shadow:0 10px 32px #ff315927}
+.hero{padding:36px 0 65px}.banner{height:clamp(180px,31vw,320px);position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:#16080e;box-shadow:0 28px 80px #0008}
+.banner img{width:100%;height:100%;object-fit:cover;display:block;opacity:.72;filter:saturate(1.1)}.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#08060cbb,transparent 78%),linear-gradient(0deg,#09070d55,transparent 65%)}
+.banner-label{position:absolute;z-index:1;left:clamp(20px,5vw,54px);bottom:clamp(20px,5vw,46px)}.banner-label small{font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:#ff9cb5;font-weight:850}.banner-label strong{display:block;font-size:clamp(30px,6vw,62px);letter-spacing:-.06em;line-height:1.05;margin-top:8px}.banner-label strong span{color:#ff6f9b}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding:42px 8px 0}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#ff8ca8;font-size:11px;letter-spacing:.19em;text-transform:uppercase;font-weight:900}.dot{width:7px;height:7px;border-radius:50%;background:#68f0a7;box-shadow:0 0 12px #68f0a7}
+h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.065em;margin:17px 0}h1 span{background:linear-gradient(100deg,#fff,#ff8eae 53%,#c9a4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:600px;color:var(--muted);line-height:1.85;font-size:15px;margin:0 0 24px}.actions{display:flex;flex-wrap:wrap;gap:11px}
+.profile{text-align:center;padding:28px;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,#ffffff12,#ffffff03);box-shadow:0 24px 65px #0005;position:relative;overflow:hidden}.profile:before{content:"";position:absolute;width:190px;height:190px;top:-110px;left:calc(50% - 95px);border-radius:50%;background:#ff31592b;filter:blur(25px)}
+.avatar{position:relative;width:132px;height:132px;padding:4px;margin:0 auto 17px;border-radius:36px;background:linear-gradient(135deg,var(--red),var(--purple),#ff9bb8);box-shadow:0 0 40px #ff31592e;transform:rotate(-3deg)}.avatar img{width:100%;height:100%;object-fit:cover;border-radius:32px;display:block}.profile h2{margin:0 0 7px;font-size:23px;letter-spacing:.04em}.profile p{margin:0 auto 18px;color:var(--muted);font-size:13px;line-height:1.6;max-width:270px}.status{display:inline-flex;align-items:center;gap:8px;border:1px solid #68f0a733;color:#b5f9d0;border-radius:999px;padding:8px 12px;font-size:11px}
+.section{padding:30px 0 62px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:23px}.kicker{color:#ff83a1;font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.section-head h2{font-size:clamp(27px,4vw,39px);letter-spacing:-.045em;margin:8px 0 0}.section-head p{max-width:400px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{--glow:#ff31591e;position:relative;overflow:hidden;min-height:220px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#17121f,#100d16);transition:.23s}.card:hover{transform:translateY(-5px);border-color:#ff668b88}.card:before{content:"";position:absolute;width:155px;height:155px;right:-80px;top:-80px;border-radius:50%;background:var(--glow);filter:blur(9px)}.card-icon{width:49px;height:49px;display:grid;place-items:center;border:1px solid var(--line);border-radius:16px;background:#ffffff09;font-size:23px;margin-bottom:20px}.card h3{font-size:18px;margin:0 0 9px}.card p{color:var(--muted);font-size:13px;line-height:1.75;margin:0 0 20px}.card-link{display:inline-flex;align-items:center;gap:8px;color:#ff8da8;font-size:12px;font-weight:900}.card-link span{transition:.2s}.card-link:hover span{transform:translateX(4px)}
+.callout{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:30px;border:1px solid #ff557c42;border-radius:25px;background:linear-gradient(110deg,#ff315916,#a23bff12)}.callout h2{margin:0 0 8px;font-size:25px}.callout p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:27px 0 35px;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a:hover{color:white}
+@media(max-width:760px){.nav-links{display:none}.hero-grid{grid-template-columns:1fr;padding-top:30px}.profile{max-width:440px;width:100%;margin:auto}.cards{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}}
+@media(max-width:520px){.wrap{width:calc(100% - 24px)}nav{min-height:68px}.brand{font-size:12px}nav>.btn{padding:11px 12px;font-size:11px}.hero{padding-top:20px}.banner{height:205px;border-radius:20px}.hero-grid{padding-left:0;padding-right:0}.cards{grid-template-columns:1fr}.callout{align-items:flex-start;flex-direction:column;padding:23px}h1{font-size:48px}.lead{font-size:14px}}
+
+/* Katalog produk dan tombol pemesanan */
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.product-card{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:23px;border:1px solid #ffffff1c;border-radius:23px;background:linear-gradient(145deg,#191323,#100d17);box-shadow:0 15px 40px #0003;transition:transform .25s,border-color .25s,box-shadow .25s}
+.product-card:hover{transform:translateY(-5px);border-color:#a23bff99;box-shadow:0 16px 42px #7b2cff20,0 0 0 1px #a23bff16}
+.product-art{display:grid;place-items:center;min-height:115px;margin-bottom:18px;border:1px solid #a23bff25;border-radius:17px;background:radial-gradient(circle at 25% 20%,#a23bff35,transparent 55%),linear-gradient(135deg,#21152f,#11101a);font-size:42px}
+.product-tag{align-self:flex-start;margin-bottom:10px;padding:6px 9px;border:1px solid #a23bff40;border-radius:999px;color:#d8b5ff;font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.product-card h3{margin:0 0 8px;font-size:18px}.product-card p{margin:0 0 15px;color:var(--muted);font-size:13px;line-height:1.7}
+.product-price{margin-top:auto;margin-bottom:17px;color:#f5eaff;font-size:14px;font-weight:900}.product-price small{display:block;margin-bottom:4px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.product-actions{display:grid;grid-template-columns:1fr;gap:9px}.order-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 13px;border:1px solid #ffffff1c;border-radius:12px;background:#ffffff08;color:#fff;font-size:12px;font-weight:850;text-align:center;cursor:pointer;transition:.2s}.order-btn:hover{transform:translateY(-2px);border-color:#a23bff99;background:#a23bff18}.order-btn.whatsapp{border:0;background:linear-gradient(110deg,#168b52,#20b86a);box-shadow:0 8px 20px #20b86a20}.order-btn.whatsapp:hover{background:linear-gradient(110deg,#1ba660,#35d883)}
+.product-note{margin-top:18px;padding:13px 15px;border:1px solid #a23bff26;border-radius:14px;background:#a23bff0b;color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:760px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.product-grid{grid-template-columns:1fr}.product-card{padding:19px}.product-art{min-height:95px}}
+
+/* ===== CSS CHAKA MUSIC PLAYER PRO ===== */
+.music-player{--mp-pink:#ff3478;--mp-purple:#b64dff;position:fixed;right:16px;bottom:16px;z-index:9999;width:min(390px,calc(100vw - 24px));max-height:min(82vh,760px);overflow:auto;padding:15px;border:1px solid #c77bff55;border-radius:23px;background:linear-gradient(145deg,rgba(23,15,35,.98),rgba(12,10,21,.98));color:#fbf7ff;box-shadow:0 18px 55px #000b,0 0 30px #a23bff20;backdrop-filter:blur(18px);font-family:inherit;scrollbar-width:thin;scrollbar-color:#713e91 transparent}
+.music-player *{box-sizing:border-box}.music-player button,.music-player input{font:inherit}.music-player button{cursor:pointer}.music-player .mp-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.music-player .mp-brand{font-size:14px;font-weight:850;letter-spacing:.2px}.music-player .mp-status{display:block;margin-top:4px;color:#c4b5d5;font-size:10px;line-height:1.45;overflow-wrap:anywhere}.music-player .mp-badge{white-space:nowrap;border:1px solid #c65cff77;border-radius:999px;padding:5px 8px;color:#e2c4ff;font-size:10px}
+.music-player .mp-art-row{display:grid;grid-template-columns:105px minmax(0,1fr);gap:13px;align-items:center;margin-bottom:13px}.music-player .mp-cover{position:relative;display:grid;place-items:center;aspect-ratio:1;border-radius:17px;overflow:hidden;background:radial-gradient(circle at 25% 20%,#ff6da5 0,transparent 34%),radial-gradient(circle at 78% 78%,#853bff 0,transparent 44%),linear-gradient(135deg,#27123f,#090812 70%);border:1px solid #ffffff25;box-shadow:0 8px 25px #0007,inset 0 0 25px #f4c7ff14}.music-player .mp-cover:before,.music-player .mp-cover:after{content:"";position:absolute;width:74%;aspect-ratio:1;border:1px solid #f5d9ff65;border-radius:50%;transform:rotate(-25deg) scaleY(.42)}.music-player .mp-cover:after{width:52%;border-color:#ff72b777;transform:rotate(45deg) scaleY(.7)}.music-player .mp-cover-glyph{position:relative;z-index:1;font-size:34px;font-weight:900;text-shadow:0 0 22px #ff55ce}.music-player .mp-track-title{font-size:13px;font-weight:850;line-height:1.4;overflow-wrap:anywhere}.music-player .mp-artist{margin-top:5px;color:#c7b4dc;font-size:10px;line-height:1.4}.music-player .mp-playing{display:inline-flex;align-items:center;gap:3px;margin-top:9px;color:#ff9ed0;font-size:9px;letter-spacing:1px;text-transform:uppercase}.music-player .mp-playing i{display:block;width:3px;height:10px;border-radius:4px;background:linear-gradient(#ff70b4,#b957ff);animation:mp-eq .65s ease-in-out infinite alternate}.music-player .mp-playing i:nth-child(2){height:16px;animation-delay:-.4s}.music-player .mp-playing i:nth-child(3){height:7px;animation-delay:-.2s}.music-player .mp-playing i:nth-child(4){height:13px;animation-delay:-.5s}.music-player:not(.is-playing) .mp-playing i{animation-play-state:paused;transform:scaleY(.3)}@keyframes mp-eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.music-player .mp-visualizer{display:block;width:100%;height:54px;margin:0 0 2px;border-radius:12px;background:linear-gradient(90deg,#ff34780b,#b64dff13);border:1px solid #ffffff0d}.music-player .mp-range{display:block;width:100%;margin:8px 0;accent-color:#c65cff;cursor:pointer}.music-player .mp-times{display:flex;justify-content:space-between;color:#b9adca;font-size:10px}.music-player .mp-controls{display:grid;grid-template-columns:39px 39px minmax(0,1fr) 39px 39px;gap:6px;align-items:center;margin-top:12px}.music-player .mp-btn{min-width:0;min-height:38px;border:1px solid #ffffff24;color:#f8f3ff;background:#211a2a;border-radius:11px;padding:7px 4px;font-size:12px;font-weight:800}.music-player .mp-btn.primary{background:linear-gradient(115deg,var(--mp-pink),var(--mp-purple));border:0;box-shadow:0 5px 18px #b64dff28}.music-player .mp-btn.active{border-color:#ff79c5;color:#ffb3db;background:#421b48}.music-player .mp-volume{display:grid;grid-template-columns:40px minmax(0,1fr) 32px;align-items:center;gap:8px;margin-top:12px;color:#cdbddd;font-size:10px}.music-player .mp-volume input{width:100%;accent-color:#ff62b3}.music-player .mp-section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:15px 0 7px;font-size:11px;font-weight:800;letter-spacing:.3px}.music-player .mp-mode{display:flex;gap:6px}.music-player .mp-mode .mp-btn{min-height:28px;padding:4px 8px;font-size:10px}.music-player .mp-playlist{display:grid;gap:6px}.music-player .mp-item{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:9px;width:100%;padding:8px;border:1px solid #ffffff12;border-radius:12px;text-align:left;background:#ffffff06;color:#f7efff}.music-player .mp-item[aria-current="true"]{border-color:#c05bff99;background:linear-gradient(90deg,#a23bff21,#ff347811)}.music-player .mp-item-num{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:#ffffff0c;color:#d9b8ff;font-size:10px;font-weight:850}.music-player .mp-item-name{font-size:10px;font-weight:750;line-height:1.35;overflow-wrap:anywhere}.music-player .mp-item-artist{display:block;margin-top:3px;color:#a99ab8;font-size:9px;font-weight:500}.music-player .mp-item-time{color:#b7a4c9;font-size:9px}.music-player .mp-note{display:block;margin-top:10px;color:#9586a7;font-size:9px;line-height:1.5}.music-player button:focus-visible,.music-player input:focus-visible{outline:2px solid #e0b0ff;outline-offset:2px}
+@media(max-width:520px){.music-player{right:10px;bottom:10px;width:calc(100vw - 20px);padding:12px;max-height:78vh;border-radius:19px}.music-player .mp-art-row{grid-template-columns:88px minmax(0,1fr);gap:11px}.music-player .mp-controls{grid-template-columns:34px 34px minmax(0,1fr) 34px 34px;gap:5px}.music-player .mp-btn{min-height:36px;font-size:11px}.music-player .mp-visualizer{height:43px}}
+@media(prefers-reduced-motion:reduce){.music-player .mp-playing i{animation:none}}
+
+
+/* ===== CHAKA STORE: Loading Screen (tambahan, tidak mengubah style lama) ===== */
+.chaka-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 42%, #39124f 0%, #190c25 34%, #09070d 76%);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .65s ease, visibility .65s ease;
+}
+.chaka-loading::before,
+.chaka-loading::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 1px solid #a23bff26;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: chaka-orbit 8s linear infinite;
+}
+.chaka-loading::after {
+  width: 390px;
+  height: 390px;
+  border-color: #ff31591a;
+  animation-direction: reverse;
+  animation-duration: 13s;
+}
+.chaka-loading.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loading-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(100%, 320px);
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.loading-logo {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ff9cb566;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ff3159, #a23bff);
+  box-shadow: 0 0 25px #a23bff66, 0 0 65px #ff315922;
+  animation: chaka-logo-pulse 1.6s ease-in-out infinite alternate;
+}
+.loading-logo span {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 950;
+  letter-spacing: -2px;
+}
+.loading-brand {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 950;
+  letter-spacing: .13em;
+}
+.loading-brand span {
+  color: #ff78a1;
+}
+.loading-subtitle {
+  margin-top: 8px;
+  color: #bca9cd;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .42em;
+}
+.loading-equalizer {
+  display: flex;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 29px 0 20px;
+}
+.loading-equalizer i {
+  display: block;
+  width: 4px;
+  height: 12px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #ff78a1, #a23bff);
+  box-shadow: 0 0 12px #a23bff66;
+  animation: chaka-equalizer .75s ease-in-out infinite alternate;
+}
+.loading-equalizer i:nth-child(2),
+.loading-equalizer i:nth-child(6) { animation-delay: -.35s; height: 22px; }
+.loading-equalizer i:nth-child(3),
+.loading-equalizer i:nth-child(5) { animation-delay: -.55s; height: 30px; }
+.loading-equalizer i:nth-child(4) { animation-delay: -.2s; height: 37px; }
+.loading-message {
+  margin-bottom: 12px;
+  color: #d9c7e8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+.loading-track {
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ffffff1c;
+}
+.loading-bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff3159, #ff78a1, #b56bff);
+  box-shadow: 0 0 14px #b56bff;
+  transition: width .18s ease;
+}
+.loading-percent {
+  align-self: flex-end;
+  margin-top: 9px;
+  color: #d4b8f4;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes chaka-equalizer {
+  from { transform: scaleY(.35); opacity: .65; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+@keyframes chaka-logo-pulse {
+  from { transform: translateY(0) scale(.98); }
+  to { transform: translateY(-3px) scale(1.03); }
+}
+@keyframes chaka-orbit {
+  from { transform: rotate(0deg) scale(.96); }
+  to { transform: rotate(360deg) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chaka-loading::before, .chaka-loading::after,
+  .loading-logo, .loading-equalizer i {
+    animation: none !important;
+  }
+  .chaka-loading { transition-duration: .01ms; }
+}
+
+
+
+/* ===== CHAKA STORE LOADING SCREEN: polished self-contained design ===== */
+html.chaka-loading-active,
+html.chaka-loading-active body { overflow: hidden !important; }
+#chaka-loading.chaka-loading {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  width: 100vw !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 18% 18%, rgba(118, 24, 205, .32), transparent 35%),
+    radial-gradient(ellipse at 82% 78%, rgba(255, 35, 135, .23), transparent 34%),
+    radial-gradient(ellipse at 50% 45%, #180d2a 0%, #090610 58%, #030207 100%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity .75s ease, visibility .75s ease !important;
+}
+#chaka-loading::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -35% !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, #8e2dff18 55deg, transparent 105deg, #ff2d9d1c 190deg, transparent 260deg, #8e2dff18 320deg, transparent 360deg) !important;
+  filter: blur(14px);
+  animation: chaka-loader-aurora 16s linear infinite !important;
+}
+#chaka-loading::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  opacity: .22;
+  background-image: radial-gradient(#ffffffb0 .7px, transparent .9px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(transparent, #000 20%, #000 80%, transparent);
+}
+#chaka-loading.is-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+#chaka-loading .loading-content {
+  width: min(100%, 370px) !important;
+  padding: clamp(22px, 5vw, 38px) !important;
+  border: 1px solid #d79bff2e !important;
+  border-radius: 28px !important;
+  background: linear-gradient(145deg, #160d24d9, #08050edb) !important;
+  box-shadow: 0 0 0 1px #ffffff06 inset, 0 20px 90px #0009, 0 0 65px #a23bff20 !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: chaka-loader-enter .8s cubic-bezier(.2,.8,.2,1) both;
+}
+#chaka-loading .loading-logo {
+  width: 82px !important;
+  height: 82px !important;
+  margin-bottom: 21px !important;
+  border-radius: 25px !important;
+  background: linear-gradient(135deg, #ff368f 0%, #b345ff 52%, #643dff 100%) !important;
+  box-shadow: 0 0 26px #d13aff70, 0 0 70px #a23bff30, 0 0 0 8px #b64bff0b !important;
+}
+#chaka-loading .loading-logo span {
+  font-size: 29px !important;
+  text-shadow: 0 2px 15px #ffffff50;
+}
+#chaka-loading .loading-brand {
+  font-size: clamp(22px, 5vw, 29px) !important;
+  letter-spacing: .09em !important;
+  text-shadow: 0 0 28px #b64bff30;
+}
+#chaka-loading .loading-brand span {
+  color: #ff62c0 !important;
+}
+#chaka-loading .loading-subtitle {
+  letter-spacing: .38em !important;
+  color: #c7b2df !important;
+}
+#chaka-loading .loading-equalizer {
+  height: 45px !important;
+  gap: 6px !important;
+  margin: 26px 0 22px !important;
+}
+#chaka-loading .loading-equalizer i {
+  width: 5px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(180deg, #ff74cb, #a34dff 60%, #654aff) !important;
+  box-shadow: 0 0 13px #b14bff75 !important;
+}
+#chaka-loading .loading-message {
+  color: #e8d9f7 !important;
+  font-size: 10px !important;
+  letter-spacing: .18em !important;
+}
+#chaka-loading .loading-track {
+  height: 7px !important;
+  padding: 2px !important;
+  border: 1px solid #dba5ff42 !important;
+  border-radius: 99px !important;
+  background: #ffffff0b !important;
+  box-shadow: 0 0 22px #a23bff17 inset !important;
+}
+#chaka-loading .loading-bar {
+  min-width: 0;
+  border-radius: 99px !important;
+  background: linear-gradient(90deg, #ff3c9c, #d14cff, #7965ff) !important;
+  box-shadow: 0 0 14px #c44dff9c !important;
+}
+#chaka-loading .loading-percent {
+  color: #e9c6ff !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+@keyframes chaka-loader-aurora {
+  to { transform: rotate(360deg); }
+}
+@keyframes chaka-loader-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 480px) {
+  #chaka-loading .loading-content { border-radius: 23px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #chaka-loading::before, #chaka-loading .loading-content,
+  #chaka-loading .loading-logo, #chaka-loading .loading-equalizer i {
+    animation: none !important;
+  }
+}
+
+
+/* ===== CHAKA STORE Glassy Sidebar V3 FIX ===== */
+.gsv3-mobilebar{display:none}
+.gsv3-scrim{position:fixed;inset:0;background:rgba(4,3,10,.62);backdrop-filter:blur(5px);z-index:9997;opacity:0;visibility:hidden;transition:.25s}
+.gsv3-scrim.gsv3-show{opacity:1;visibility:visible}
+.gsv3-sidebar{position:fixed;z-index:9998;left:18px;top:18px;bottom:18px;width:258px;padding:22px 15px 16px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(15,10,25,.92);box-shadow:0 20px 70px rgba(0,0,0,.4);backdrop-filter:blur(22px);display:flex;flex-direction:column;color:#f8f4ff;transform:translateX(calc(-100% - 30px));transition:transform .3s ease;overflow-y:auto}
+.gsv3-sidebar.gsv3-open{transform:translateX(0)}
+.gsv3-brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14px;letter-spacing:.04em;padding:2px 5px 25px;white-space:nowrap}
+.gsv3-brandmark,.gsv3-avatar{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,#ff3159,#a23bff);color:white;font-weight:900;box-shadow:0 5px 20px #a23bff35}
+.gsv3-v3{font-size:9px;padding:4px 6px;border-radius:6px;background:#a23bff28;color:#d7a8ff;margin-left:auto}
+.gsv3-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#9c91ae;padding:8px 10px}
+.gsv3-nav{display:grid;gap:5px}
+.gsv3-nav a{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:11px;color:#cfc6dc;text-decoration:none;font-size:13px;transition:background .2s,color .2s}
+.gsv3-nav a:hover,.gsv3-nav a.gsv3-active{background:linear-gradient(100deg,#ff315925,#a23bff22);color:#fff}
+.gsv3-ico{width:19px;text-align:center;color:#ff7ca9;font-size:16px}
+.gsv3-divider{height:1px;background:rgba(255,255,255,.09);margin:17px 5px 12px}
+.gsv3-profile{margin-top:auto;display:flex;align-items:center;gap:10px;padding:16px 4px 13px;border-top:1px solid rgba(255,255,255,.1);font-size:11px}
+.gsv3-profile strong,.gsv3-profile small{display:block}.gsv3-profile small{color:#a99db8;margin-top:4px}.gsv3-online{margin-left:auto;width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 12px #4ade80}
+.gsv3-bottom{display:flex;align-items:center;justify-content:space-between;color:#a99db8;font-size:11px;padding:8px 5px 0}
+.gsv3-theme{border:1px solid #ffffff24;border-radius:20px;width:36px;height:20px;background:#241b32;padding:2px;cursor:pointer}.gsv3-theme span{display:block;width:14px;height:14px;border-radius:50%;background:#ff78a1;transition:transform .2s}.gsv3-theme[aria-pressed="true"] span{transform:translateX(15px)}
+.gsv3-mobilebar{position:fixed;z-index:9996;top:12px;left:12px;align-items:center;gap:10px;padding:7px 12px;border:1px solid #ffffff18;border-radius:13px;background:rgba(12,8,18,.78);backdrop-filter:blur(16px);color:#fff}
+.gsv3-menu{display:grid;place-items:center;width:30px;height:30px;border:0;border-radius:8px;background:linear-gradient(135deg,#ff3159,#a23bff);color:white;font-size:17px;cursor:pointer}
+.gsv3-mobilebrand{font-size:12px;font-weight:800;letter-spacing:.04em}.gsv3-mobilebrand span{color:#ff78a1}
+@media(min-width:1100px){body.gsv3-enabled header,body.gsv3-enabled main,body.gsv3-enabled footer{margin-left:0}}
+@media(max-width:700px){.gsv3-mobilebar{display:flex}body.gsv3-enabled header{padding-top:52px}body.gsv3-enabled header nav{gap:12px;flex-wrap:wrap}.gsv3-sidebar{left:10px;top:10px;bottom:10px;width:min(285px,calc(100vw - 36px))}}
+@media(prefers-reduced-motion:reduce){.gsv3-sidebar,.gsv3-scrim,.gsv3-theme span{transition:none}}
+
+body.gsv3-soft-theme{filter:saturate(.82)}
+
+
+/* ===== CHAKA STORE GLASSY SIDEBAR: FINAL VISIBILITY FIX ===== */
+/* Desktop: sidebar stays visible. Mobile: open it with the menu button. */
+@media (min-width: 701px) {
+  .gsv3-mobilebar { display: none !important; }
+  .gsv3-sidebar { transform: translateX(0) !important; visibility: visible !important; opacity: 1 !important; }
+  .gsv3-scrim { display: none !important; }
+  body.gsv3-enabled header,
+  body.gsv3-enabled main,
+  body.gsv3-enabled footer { margin-left: 290px !important; }
+  body.gsv3-enabled header { width: calc(100% - 290px); }
+}
+@media (max-width: 700px) {
+  .gsv3-mobilebar { display: flex !important; }
+  .gsv3-sidebar { transform: translateX(calc(-100% - 30px)); visibility: visible; }
+  .gsv3-sidebar.gsv3-open { transform: translateX(0) !important; }
+  body.gsv3-enabled header, body.gsv3-enabled main, body.gsv3-enabled footer { margin-left: 0 !important; width: auto; }
+}
+/* Keep the sidebar above page content and the mobile trigger clickable. */
+.gsv3-sidebar { box-sizing: border-box; }
+.gsv3-mobilebar { z-index: 10000 !important; }
+.gsv3-scrim { z-index: 9997; }
+
+/* ===== CHAKA STORE APPEARANCE CONTROL ===== */
+:root {
+  --appearance-bg: #09070d;
+  --appearance-panel: #14101b;
+  --appearance-text: #fbf8ff;
+  --appearance-muted: #b4aabb;
+  --appearance-line: #ffffff;
+  --appearance-red: #ff3159;
+  --appearance-pink: #ff78a1;
+  --appearance-purple: #a23bff;
+  --appearance-link: #ff8da8;
+  --appearance-button: #ff3159;
+  --appearance-sidebar: #0c0812;
+  --appearance-sidebar-opacity: 88%;
+  /* Map the controls to the website's existing theme variables. */
+  --bg: var(--appearance-bg);
+  --panel: var(--appearance-panel);
+  --text: var(--appearance-text);
+  --muted: var(--appearance-muted);
+  --line: color-mix(in srgb, var(--appearance-line) 11%, transparent);
+  --red: var(--appearance-red);
+  --pink: var(--appearance-pink);
+  --purple: var(--appearance-purple);
+}
+body { background-color: var(--appearance-bg); color: var(--appearance-text); }
+body:before { background: radial-gradient(ellipse at 12% 8%, color-mix(in srgb, var(--appearance-red) 15%, transparent), transparent 34%), radial-gradient(ellipse at 90% 40%, color-mix(in srgb, var(--appearance-purple) 13%, transparent), transparent 38%), var(--appearance-bg); }
+header { background: color-mix(in srgb, var(--appearance-bg) 87%, transparent); }
+.nav-links a:hover, .footer-links a:hover { color: var(--appearance-text); }
+.btn.primary { background: linear-gradient(110deg, var(--appearance-button), var(--appearance-purple)); }
+.btn:hover { border-color: color-mix(in srgb, var(--appearance-pink) 55%, transparent); }
+.banner-label small, .eyebrow, .kicker, .card-link { color: var(--appearance-link); }
+.brand-mark, .avatar, .loading-logo, .gsv3-menu { background: linear-gradient(135deg, var(--appearance-red), var(--appearance-purple)); }
+.profile, .card, .product-card { color: var(--appearance-text); }
+.card, .product-card { background: linear-gradient(145deg, color-mix(in srgb, var(--appearance-panel) 92%, white 8%), var(--appearance-panel)); }
+.product-tag { border-color: color-mix(in srgb, var(--appearance-purple) 45%, transparent); }
+.product-card:hover { border-color: color-mix(in srgb, var(--appearance-purple) 60%, transparent); }
+.order-btn:hover { border-color: color-mix(in srgb, var(--appearance-purple) 60%, transparent); }
+.gsv3-sidebar { background: color-mix(in srgb, var(--appearance-sidebar) var(--appearance-sidebar-opacity), transparent) !important; color: var(--appearance-text); }
+.gsv3-mobilebar { background: color-mix(in srgb, var(--appearance-sidebar) var(--appearance-sidebar-opacity), transparent) !important; color: var(--appearance-text); }
+.music-player { color: var(--appearance-text); }
+.music-player .mp-toggle { border-color: color-mix(in srgb, var(--appearance-purple) 55%, transparent); }
+.music-player .mp-toggle:hover { border-color: var(--appearance-pink); }
+.chaka-loading { background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--appearance-purple) 35%, var(--appearance-bg)) 0%, color-mix(in srgb, var(--appearance-sidebar) 75%, var(--appearance-bg)) 44%, var(--appearance-bg) 76%); }
+.loading-brand span { color: var(--appearance-pink); }
+.loading-equalizer i, .loading-bar { background: linear-gradient(90deg, var(--appearance-red), var(--appearance-pink), var(--appearance-purple)); }
+
+.appearance-fab { position: fixed; z-index: 100020; right: 18px; top: 18px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid color-mix(in srgb, var(--appearance-purple) 55%, transparent); border-radius: 999px; padding: 10px 14px; background: color-mix(in srgb, var(--appearance-sidebar) 92%, transparent); color: var(--appearance-text); font-family: inherit; font-size: 12px; line-height: 1.2; font-weight: 800; cursor: pointer; box-shadow: 0 8px 28px #0006; backdrop-filter: blur(16px); }
+.appearance-fab:hover { border-color: var(--appearance-pink); transform: translateY(-1px); }
+.appearance-panel { position: fixed; z-index: 100030; top: 68px; right: 18px; width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 84px); overflow: auto; padding: 19px; border: 1px solid color-mix(in srgb, var(--appearance-purple) 45%, transparent); border-radius: 22px; background: color-mix(in srgb, var(--appearance-sidebar) 97%, transparent); color: var(--appearance-text); box-shadow: 0 22px 70px #000a; backdrop-filter: blur(24px); scrollbar-width: thin; }
+.appearance-panel[hidden] { display: none !important; }
+.appearance-panel__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+.appearance-panel__header h2 { margin: 3px 0 5px; font-size: 23px; letter-spacing: -.04em; }
+.appearance-panel__header p { margin: 0; color: var(--appearance-muted); font-size: 12px; line-height: 1.55; }
+.appearance-eyebrow { color: var(--appearance-pink); font-size: 9px; font-weight: 900; letter-spacing: .2em; }
+.appearance-close { flex: 0 0 32px; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 10px; background: #ffffff09; color: var(--appearance-text); font-size: 23px; cursor: pointer; }
+.appearance-field { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--appearance-line) 9%, transparent); color: var(--appearance-text); font-size: 12px; }
+.appearance-field input[type="color"] { width: 42px; height: 30px; padding: 2px; border: 1px solid color-mix(in srgb, var(--appearance-line) 22%, transparent); border-radius: 9px; background: transparent; cursor: pointer; }
+.appearance-field--range { display: block; }
+.appearance-field--range span { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.appearance-field--range input { width: 100%; accent-color: var(--appearance-purple); }
+.appearance-presets { margin-top: 17px; color: var(--appearance-muted); font-size: 11px; }
+.appearance-presets > div { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+.appearance-presets button, .appearance-actions button { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; background: #ffffff09; color: var(--appearance-text); font-size: 11px; font-weight: 800; cursor: pointer; }
+.appearance-presets button:hover, .appearance-actions button:hover { border-color: var(--appearance-pink); }
+.appearance-actions { display: grid; grid-template-columns: .7fr 1.3fr; gap: 8px; margin-top: 17px; }
+.appearance-actions .is-primary { border-color: transparent; background: linear-gradient(110deg, var(--appearance-button), var(--appearance-purple)); }
+.appearance-note { margin: 12px 0 0; color: var(--appearance-muted); font-size: 10px; line-height: 1.6; }
+@media(max-width:520px) { .appearance-fab { top: 12px; right: 12px; padding: 9px 11px; } .appearance-fab span { display: none; } .appearance-panel { top: 58px; right: 12px; padding: 15px; max-height: calc(100dvh - 70px); } }
+
+
+/* ===== CHAKA STORE FIX PACK: theme variables, Appearance panel, Music Player PRO ===== */
+:root{
+ --appearance-bg:#09070d;--appearance-panel:#14101b;--appearance-text:#fbf8ff;--appearance-muted:#b4aabb;
+ --appearance-line:#ffffff;--appearance-red:#ff3159;--appearance-pink:#ff78a1;--appearance-purple:#a23bff;
+ --appearance-link:#ff8da8;--appearance-button:#ff3159;--appearance-sidebar:#0c0812;--appearance-sidebar-opacity:88%;
+}
+body{background:var(--appearance-bg)!important;color:var(--appearance-text)!important}
+body:before{background:radial-gradient(ellipse at 12% 8%,color-mix(in srgb,var(--appearance-red) 16%,transparent),transparent 34%),radial-gradient(ellipse at 90% 40%,color-mix(in srgb,var(--appearance-purple) 15%,transparent),transparent 38%),var(--appearance-bg)!important}
+header{background:color-mix(in srgb,var(--appearance-bg) 88%,transparent)!important;border-color:color-mix(in srgb,var(--appearance-line) 12%,transparent)!important}
+a:hover,.nav-links a:hover{color:var(--appearance-link)!important}
+.btn.primary,.actions .primary{background:linear-gradient(110deg,var(--appearance-button),var(--appearance-purple))!important}
+.brand-mark{background:linear-gradient(135deg,var(--appearance-red),var(--appearance-purple))!important}
+.profile,.card,.product-card,.link-card,.contact-card,.about-card{background:var(--appearance-panel)!important;color:var(--appearance-text)!important;border-color:color-mix(in srgb,var(--appearance-line) 16%,transparent)!important}
+p,.lead,.nav-links,.muted{color:var(--appearance-muted)}
+.gsv3-sidebar{background:color-mix(in srgb,var(--appearance-sidebar) var(--appearance-sidebar-opacity),transparent)!important;backdrop-filter:blur(22px)}
+.chaka-appearance-trigger{position:fixed;right:18px;top:18px;z-index:10020;border:1px solid #ffffff30;border-radius:999px;padding:11px 16px;color:white;background:linear-gradient(110deg,var(--appearance-button),var(--appearance-purple));font-size:12px;font-weight:850;box-shadow:0 8px 28px #0006;cursor:pointer}
+.chaka-appearance-trigger:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.chaka-appearance-panel{position:fixed;z-index:10030;right:18px;top:68px;width:min(370px,calc(100vw - 28px));max-height:calc(100vh - 88px);overflow:auto;padding:20px;border:1px solid color-mix(in srgb,var(--appearance-purple) 48%,transparent);border-radius:22px;background:color-mix(in srgb,var(--appearance-panel) 96%,#000);color:var(--appearance-text);box-shadow:0 24px 80px #000b;backdrop-filter:blur(24px)}
+.chaka-appearance-panel[hidden]{display:none!important}
+.appearance-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.appearance-head small{font-size:9px;letter-spacing:.2em;color:var(--appearance-pink);font-weight:900}.appearance-head h2{margin:3px 0 0;font-size:24px}.appearance-x{border:1px solid #ffffff20;border-radius:10px;width:34px;height:34px;background:#ffffff0c;color:inherit;font-size:24px;cursor:pointer}
+.appearance-desc{font-size:12px;line-height:1.6;color:var(--appearance-muted)}
+.appearance-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}.appearance-presets button,.appearance-actions button{border:1px solid #ffffff20;border-radius:10px;background:#ffffff0b;color:inherit;padding:9px 7px;font-size:11px;font-weight:800;cursor:pointer}.appearance-presets button:hover{border-color:var(--appearance-pink)}
+.appearance-colors{display:grid;grid-template-columns:1fr 1fr;gap:8px}.appearance-colors label{display:flex;align-items:center;justify-content:space-between;gap:7px;border:1px solid #ffffff12;border-radius:10px;padding:8px;font-size:11px;color:var(--appearance-muted)}.appearance-colors input[type=color]{width:34px;height:26px;border:0;background:transparent;padding:0;cursor:pointer}
+.opacity-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px;font-size:11px;color:var(--appearance-muted)}.opacity-row input{grid-column:1/-1;width:100%;accent-color:var(--appearance-purple)}
+.appearance-actions{display:flex;gap:8px;margin-top:14px}.appearance-actions button{flex:1}.appearance-actions .is-primary{border:0;background:linear-gradient(110deg,var(--appearance-button),var(--appearance-purple));color:white}
+.appearance-note{font-size:11px;line-height:1.5;color:var(--appearance-muted);margin-bottom:0}
+.chaka-music-player{position:fixed;z-index:10010;left:18px;bottom:18px;width:min(340px,calc(100vw - 28px));padding:15px;border:1px solid color-mix(in srgb,var(--appearance-purple) 45%,transparent);border-radius:20px;background:color-mix(in srgb,var(--appearance-panel) 95%,#000);color:var(--appearance-text);box-shadow:0 18px 55px #0009;backdrop-filter:blur(22px);font-size:12px}
+.chaka-music-player.is-collapsed{width:min(260px,calc(100vw - 28px));padding:12px}.chaka-music-player.is-collapsed>:not(.mp-top){display:none!important}
+.mp-top,.mp-brand,.mp-now,.mp-controls,.mp-progress,.mp-volume{display:flex;align-items:center;gap:10px}.mp-top{justify-content:space-between;margin-bottom:13px}.mp-brand{gap:9px}.mp-eq{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--appearance-red),var(--appearance-purple));font-size:19px}.mp-brand strong,.mp-brand small,.mp-meta strong,.mp-meta small,.mp-meta span{display:block}.mp-brand strong{font-size:11px;letter-spacing:.12em}.mp-brand small,.mp-meta small{font-size:9px;letter-spacing:.12em;color:var(--appearance-pink);margin-top:3px}
+.mp-toggle{border:1px solid #ffffff22;border-radius:9px;background:#ffffff0b;color:inherit;padding:7px 9px;font-size:10px;cursor:pointer}
+.mp-now{align-items:center}.mp-cover{flex-shrink:0;width:54px;height:54px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--appearance-red),var(--appearance-purple));font-size:25px;box-shadow:0 8px 22px #0005}.mp-meta{min-width:0;flex:1}.mp-meta strong{font-size:12px;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mp-meta span{font-size:10px;color:var(--appearance-muted)}.mp-meta p{font-size:10px;margin:5px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-visualizer{display:block;width:100%;height:38px;margin:8px 0 3px}.mp-progress{gap:7px;font-size:9px;color:var(--appearance-muted)}.mp-progress input,.mp-volume input{min-width:0;flex:1;accent-color:var(--appearance-pink);cursor:pointer}
+.mp-controls{justify-content:center;gap:8px;margin:10px 0}.mp-controls button{border:1px solid #ffffff1e;border-radius:10px;background:#ffffff09;color:inherit;min-width:32px;height:32px;cursor:pointer}.mp-controls .mp-main-play{min-width:86px;background:linear-gradient(110deg,var(--appearance-button),var(--appearance-purple));border:0;color:white;font-weight:850}.mp-controls button.active{border-color:var(--appearance-pink);background:#a23bff35}.mp-volume{font-size:12px;color:var(--appearance-muted);margin-bottom:10px}.mp-playlist{display:grid;gap:5px}.mp-playlist button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid transparent;border-radius:10px;padding:8px;background:#ffffff06;color:inherit;cursor:pointer}.mp-playlist button[aria-current="true"]{border-color:color-mix(in srgb,var(--appearance-pink) 50%,transparent);background:color-mix(in srgb,var(--appearance-purple) 15%,transparent)}.mp-item-num{font-size:10px;color:var(--appearance-pink);min-width:20px}.mp-playlist button>span:nth-child(2){flex:1;min-width:0}.mp-playlist strong,.mp-playlist small{display:block}.mp-playlist strong{font-size:10px}.mp-playlist small{font-size:9px;color:var(--appearance-muted);margin-top:3px}
+@media(max-width:600px){.chaka-appearance-trigger{top:auto;bottom:18px;right:14px}.chaka-appearance-panel{top:auto;bottom:70px;right:10px;max-height:75vh}.chaka-music-player{left:10px;bottom:10px;width:min(300px,calc(100vw - 20px));transform:scale(.94);transform-origin:bottom left}.chaka-music-player.is-collapsed{width:200px}.chaka-appearance-trigger{bottom:18px;right:12px}}
+
+
+/* CHAKA STORE sidebar compatibility safeguard */
+.gsv3-sidebar { z-index: 99999; }
+.gsv3-scrim { z-index: 99998; }
+.gsv3-mobilebar { z-index: 100000; }
+@media (min-width: 701px) { .gsv3-sidebar { transform: translateX(0) !important; visibility: visible !important; opacity: 1 !important; } }
+@media (max-width: 700px) { .gsv3-sidebar { transform: translateX(calc(-100% - 30px)); } .gsv3-sidebar.gsv3-open { transform: translateX(0) !important; } }
+
+</style>
+<style id="chaka-glassy-open-close-fix">
+/* Accessible open/close controls for the Glassy Sidebar on desktop and mobile */
+.gsv3-mobilebar { display:flex !important; position:fixed; top:16px; left:16px; z-index:100001 !important; }
+.gsv3-sidebar { transform:translateX(calc(-100% - 34px)) !important; visibility:hidden !important; opacity:0 !important; transition:transform .28s ease, opacity .22s ease, visibility .22s ease !important; }
+.gsv3-sidebar.gsv3-open { transform:translateX(0) !important; visibility:visible !important; opacity:1 !important; }
+.gsv3-scrim { display:block !important; }
+.gsv3-scrim.gsv3-show { opacity:1; visibility:visible; }
+.gsv3-close { display:grid; place-items:center; flex:0 0 27px; width:27px; height:27px; margin-left:auto; border:1px solid #ffffff25; border-radius:8px; background:#ffffff0d; color:#fff; font-size:22px; line-height:1; cursor:pointer; }
+.gsv3-brand { gap:8px; padding-right:0 !important; }
+.gsv3-sidebar .gsv3-visuals { margin-top:2px; }
+.gsv3-sidebar .gsv3-picture { display:none !important; }
+.gsv3-sidebar .gsv3-clock { border-top:0 !important; padding-top:0 !important; }
+body.gsv3-enabled header, body.gsv3-enabled main, body.gsv3-enabled footer { margin-left:0 !important; width:auto !important; transition:margin-left .28s ease, width .28s ease; }
+@media (min-width:701px) {
+  .gsv3-mobilebar { top:18px; left:18px; }
+  body.gsv3-enabled.gsv3-sidebar-open header,
+  body.gsv3-enabled.gsv3-sidebar-open main,
+  body.gsv3-enabled.gsv3-sidebar-open footer { margin-left:290px !important; width:calc(100% - 290px) !important; }
+  .gsv3-sidebar { left:18px; top:18px; bottom:18px; }
+  .gsv3-scrim { display:none !important; }
+  body.gsv3-sidebar-open .gsv3-mobilebar { display:none !important; }
+}
+@media (max-width:700px) {
+  .gsv3-mobilebar { top:10px; left:10px; }
+  body.gsv3-enabled header { padding-top:52px; }
+  .gsv3-sidebar { left:10px; top:10px; bottom:10px; width:min(285px,calc(100vw - 36px)); }
+  .gsv3-scrim.gsv3-show { display:block !important; }
+}
+@media(prefers-reduced-motion:reduce) { .gsv3-sidebar,.gsv3-scrim { transition:none !important; } }
+</style>
+<style id="chaka-roblox-catalog-style">
+.roblox-catalog-heading{margin:30px 0 16px;padding:22px;border:1px solid #a23bff35;border-radius:20px;background:linear-gradient(120deg,#a23bff12,#ff78a10a)}
+.roblox-catalog-heading h2{margin:5px 0 8px;font-size:clamp(24px,4vw,34px)}
+.roblox-catalog-heading p,.roblox-fast-heading p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.roblox-grid{margin-bottom:24px}
+.roblox-art{display:flex;align-items:center;justify-content:center;gap:12px;min-height:100px!important;background:radial-gradient(circle at 30% 20%,#ffdf6630,transparent 48%),linear-gradient(135deg,#21152f,#11101a)!important}
+.roblox-art img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 10px #ffd34d55)}
+.roblox-art span{font-size:17px;font-weight:950;letter-spacing:.08em;color:#ffe28a;text-shadow:0 0 18px #ffbd3b35}
+.roblox-fast-heading{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin:34px 0 16px;padding:20px;border:1px solid #35d88355;border-radius:18px;background:linear-gradient(120deg,#20b86a12,#a23bff0b)}
+.roblox-fast-heading h3{margin:0;font-size:clamp(16px,3vw,22px)}
+.roblox-fast-badge{padding:6px 10px;border-radius:999px;background:#20b86a20;border:1px solid #35d88365;color:#76f0ad;font-size:10px;font-weight:950;letter-spacing:.12em}
+.roblox-product-card .product-price{font-size:19px;color:#ffe28a}
+@media(max-width:520px){.roblox-catalog-heading{padding:17px}.roblox-fast-heading{padding:16px}}
+</style>
+<style>
+      .catalog-back{margin:0 0 22px;color:var(--appearance-muted,#b4aabb)}
+      .catalog-back a{color:var(--appearance-pink,#ff78a1);text-decoration:none;font-weight:700}
+      .catalog-back a:hover{text-decoration:underline}
+      a.split-category-card{display:block;color:inherit;text-decoration:none;min-height:100%}
+      a.split-category-card .order-btn{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;text-decoration:none}
+      .split-page-grid{align-items:stretch}
+    </style></head>
+<body class="gsv3-enabled">
+<!-- CHAKA STORE: loading screen -->
+<div aria-label="Memuat website" aria-live="polite" class="chaka-loading" id="chaka-loading" role="status">
+<div class="loading-content">
+<div class="loading-logo"><span>CS</span></div>
+<div class="loading-brand">CHAKA <span>STORE</span></div>
+<div class="loading-subtitle">Development ChakaVN </div>
+<div aria-hidden="true" class="loading-equalizer">
+<i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
+<div class="loading-message">MENYIAPKAN WEBSITE...</div>
+<div class="loading-track"><div class="loading-bar" id="chaka-loading-bar"></div></div>
+<div class="loading-percent" id="chaka-loading-percent">0%</div>
+</div>
+</div>
+<!-- End loading screen -->
+<script>
+/* CHAKA STORE loader: shared by every page; independent of sidebar and music scripts. */
+(function(){
+  const screen=document.getElementById('chaka-loading');
+  const bar=document.getElementById('chaka-loading-bar');
+  const label=document.getElementById('chaka-loading-percent');
+  if(!screen) return;
+  document.documentElement.classList.add('chaka-loading-active');
+  let value=0, finished=false; const start=Date.now();
+  function draw(n){value=Math.max(value,Math.min(100,n));if(bar)bar.style.width=value+'%';if(label)label.textContent=Math.floor(value)+'%';}
+  function finish(){if(finished)return;finished=true;draw(100);screen.classList.add('is-hidden');document.documentElement.classList.remove('chaka-loading-active');setTimeout(()=>screen.remove(),700);clearInterval(tick);}
+  const tick=setInterval(()=>{const elapsed=Date.now()-start;draw(Math.min(94,elapsed/24));if(elapsed>=2200 && document.readyState!=='loading')finish();if(elapsed>=5000)finish();},70);
+  window.addEventListener('load',()=>setTimeout(finish,Math.max(0,1500-(Date.now()-start))),{once:true});
+  setTimeout(finish,5200);
+})();
+</script>
+<!-- Glassy Sidebar V3: new navigation; original CHAKA sections/features remain below -->
+<div class="gsv3-mobilebar"><button aria-expanded="false" aria-label="Buka menu" class="gsv3-menu" id="gsv3-menu">☰</button><div class="gsv3-mobilebrand">CHAKA <span>STORE</span></div></div>
+<div id="glassy-sidebar-mount"></div>
+<header><nav class="wrap">
+<a aria-label="Chaka Store beranda" class="brand" href="../index.html"><span class="brand-mark">CS</span><span>CHAKA <span style="color:#ff78a1">STORE</span></span></a>
+<div class="nav-links"><a href="../pages/tentang.html">Tentang</a><a href="../pages/katalog.html">Produk</a><a href="../pages/link-akses.html">Link akses</a><a href="../pages/kontak.html">Kontak</a></div>
+<a class="btn primary" href="https://discord.gg/PDCAgvpPJu" rel="noopener noreferrer" target="_blank">Gabung Discord ↗</a>
+</nav></header>
+<main class="wrap">
+<section class="section" id="produk">
+<div class="section-head"><div><div class="kicker">APP PREMIUM</div><h2>Netflix</h2></div><p>Layanan Netflix premium. Pilih durasi atau paket yang tersedia.</p></div>
+<p class="catalog-back"><a href="katalog.html">← Kembali ke semua kategori</a></p>
+<div aria-label="Netflix" class="product-grid app-premium-grid split-page-grid"><article class="product-card app-premium-card" data-price="Rp45.000" data-product="Netflix — 1 Bulan">
+<div aria-hidden="true" class="product-art app-premium-art">🍿</div>
+<span class="product-tag">App Premium</span>
+<h3>Netflix — 1 Bulan</h3>
+<p>Layanan Netflix premium durasi 1 bulan. Hubungi admin untuk memastikan stok dan detail paket.</p>
+<div class="product-price"><small>Harga</small>Rp45.000</div>
+<div class="product-actions"><button class="order-btn app-premium-order" data-app-order="whatsapp" type="button">💬 Pesan via WhatsApp</button><button class="order-btn app-premium-order" data-app-order="discord" type="button">🎮 Pesan via Discord</button></div>
+</article></div>
+</section>
+</main>
+<!-- CHAKA STORE Appearance + Music Player PRO -->
+<button aria-controls="chaka-appearance-panel" aria-expanded="false" class="chaka-appearance-trigger" id="chaka-appearance-open" type="button">🎨 Appearance</button>
+<aside aria-label="Pengaturan tampilan" class="chaka-appearance-panel" hidden="" id="chaka-appearance-panel">
+<div class="appearance-head"><div><small>PERSONALISASI</small><h2>Appearance</h2></div><button aria-label="Tutup" class="appearance-x" id="chaka-appearance-close" type="button">×</button></div>
+<p class="appearance-desc">Atur warna website CHAKA STORE. Perubahan langsung terlihat.</p>
+<div class="appearance-presets">
+<button data-appearance-preset="default" type="button">CHAKA</button><button data-appearance-preset="purple" type="button">Purple</button><button data-appearance-preset="red" type="button">Red</button><button data-appearance-preset="light" type="button">Light</button>
+</div>
+<div class="appearance-colors">
+<label>Background <input data-appearance-color="bg" type="color" value="#09070d"/></label>
+<label>Panel / Card <input data-appearance-color="panel" type="color" value="#14101b"/></label>
+<label>Warna teks <input data-appearance-color="text" type="color" value="#fbf8ff"/></label>
+<label>Teks sekunder <input data-appearance-color="muted" type="color" value="#b4aabb"/></label>
+<label>Border <input data-appearance-color="line" type="color" value="#ffffff"/></label>
+<label>Warna utama <input data-appearance-color="red" type="color" value="#ff3159"/></label>
+<label>Pink <input data-appearance-color="pink" type="color" value="#ff78a1"/></label>
+<label>Purple <input data-appearance-color="purple" type="color" value="#a23bff"/></label>
+<label>Link <input data-appearance-color="link" type="color" value="#ff8da8"/></label>
+<label>Tombol <input data-appearance-color="button" type="color" value="#ff3159"/></label>
+<label>Sidebar <input data-appearance-color="sidebar" type="color" value="#0c0812"/></label>
+</div>
+<label class="opacity-row">Transparansi sidebar <span id="appearance-opacity-value">88%</span><input id="appearance-opacity" max="100" min="40" type="range" value="88"/></label>
+<div class="appearance-actions"><button id="chaka-appearance-reset" type="button">Reset</button><button class="is-primary" id="chaka-appearance-save" type="button">Simpan warna</button></div>
+<p class="appearance-note" id="appearance-feedback" role="status">Perubahan tersimpan di browser setelah kamu menekan Simpan warna.</p>
+</aside>
+<section aria-label="CHAKA Music Player" class="chaka-music-player" id="chaka-music-player">
+<div class="mp-top"><div class="mp-brand"><span class="mp-eq">♫</span><div><strong>CHAKA MUSIC</strong><small>PLAYER PRO</small></div></div><button aria-expanded="true" class="mp-toggle" id="music-toggle" type="button">▼ Tutup</button></div>
+<div class="mp-now"><div class="mp-cover" id="mp-cover"><span id="mp-cover-glyph">✦</span></div><div class="mp-meta"><small>NOW PLAYING</small><strong id="mp-track-title">CHAKA Synthwave</strong><span id="mp-artist">Original demo melody</span><p id="music-status" role="status">Siap diputar · pilih lagu lalu tekan Play</p></div></div>
+<canvas aria-label="Visualisasi musik" class="mp-visualizer" id="mp-visualizer"></canvas>
+<audio id="chaka-audio" preload="metadata"></audio>
+<div class="mp-progress"><span id="music-current-time">0:00</span><input aria-label="Posisi lagu" id="music-progress" max="100" min="0" type="range" value="0"/><span id="music-duration">0:00</span></div>
+<div class="mp-controls"><button aria-label="Lagu sebelumnya" id="music-prev" type="button">⏮</button><button class="mp-main-play" id="music-play" type="button">▶ Play</button><button aria-label="Lagu berikutnya" id="music-next" type="button">⏭</button><button aria-label="Acak lagu" aria-pressed="false" id="music-shuffle" type="button">🔀</button><button aria-label="Ulangi lagu" aria-pressed="false" id="music-repeat" type="button">🔁</button></div>
+<div class="mp-volume"><span>🔉</span><input aria-label="Volume" id="music-volume" max="1" min="0" step="0.01" type="range" value="0.75"/></div>
+<div class="mp-playlist" id="mp-playlist">
+<button data-track="0" type="button"><span class="mp-item-num">01</span><span><strong>Neon Dreams</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+<button data-track="0" type="button"><span class="mp-item-num">02</span><span><strong>Midnight Pulse</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+<button data-track="1" type="button"><span class="mp-item-num">03</span><span><strong>Digital Horizon</strong><small>CHAKA Original Demo</small></span><span>▶</span></button>
+</div>
+</section>
+<footer><div class="wrap footer-inner"><span>© <span id="year"></span> CHAKA STORE. Dibuat untuk memudahkan akses komunitas.</span><div class="footer-links"><a href="https://discord.gg/PDCAgvpPJu" rel="noopener noreferrer" target="_blank">Discord</a><a href="https://discord.gg/hYV749ckgm" rel="noopener noreferrer" target="_blank">Support</a><a href="https://discord.gg/EjPTSJygm3" rel="noopener noreferrer" target="_blank">Produk</a><a href="../index.html">Kembali ke atas ↑</a></div></div></footer>
+<script>
+(async function () {
+  const onSubpage = /\/pages\//.test(location.pathname);
+  const prefix = onSubpage ? '../' : '';
+  const mount = document.getElementById('glassy-sidebar-mount');
+  const menu = document.getElementById('gsv3-menu');
+  try {
+    const response = await fetch(prefix + 'components/glassy-sidebar.html');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    mount.innerHTML = await response.text();
+    const sidebar = document.getElementById('gsv3-sidebar');
+    const scrim = document.getElementById('gsv3-scrim');
+    const closeButton = document.getElementById('gsv3-close');
+    const desktop = () => window.matchMedia('(min-width: 701px)').matches;
+    const setOpen = (open) => {
+      sidebar?.classList.toggle('gsv3-open', open);
+      scrim?.classList.toggle('gsv3-show', open && !desktop());
+      document.body.classList.toggle('gsv3-sidebar-open', open && desktop());
+      menu?.setAttribute('aria-expanded', String(open));
+      menu?.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+      if (menu) menu.textContent = open ? '☰' : '☰';
+      if (sidebar) sidebar.setAttribute('aria-hidden', String(!open));
+    };
+    // Desktop opens by default; mobile starts closed.
+    setOpen(desktop());
+    menu?.addEventListener('click', () => setOpen(!sidebar?.classList.contains('gsv3-open')));
+    closeButton?.addEventListener('click', () => setOpen(false));
+    scrim?.addEventListener('click', () => setOpen(false));
+    sidebar?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (!desktop()) setOpen(false); }));
+    window.addEventListener('resize', () => setOpen(desktop() ? true : sidebar?.classList.contains('gsv3-open')));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && sidebar?.classList.contains('gsv3-open')) setOpen(false); });
+    const theme = document.getElementById('gsv3-theme');
+    theme?.addEventListener('click', () => {
+      const on = theme.getAttribute('aria-pressed') !== 'true';
+      theme.setAttribute('aria-pressed', String(on));
+      document.body.classList.toggle('gsv3-soft-theme', on);
+    });
+    if (onSubpage) {
+      mount.querySelectorAll('a[href="index.html"]').forEach(a => a.href = '../index.html');
+      mount.querySelectorAll('a[href^="pages/"]').forEach(a => a.href = '../' + a.getAttribute('href'));
+    }
+  } catch (error) {
+    console.error('Glassy Sidebar gagal dimuat:', error);
+    if (mount) mount.innerHTML = '<p style="padding:12px;color:#ff9ab5">Glassy Sidebar gagal dimuat. Jalankan website melalui Live Server atau hosting.</p>';
+  }
+  const mainScript = document.createElement('script');
+  mainScript.src = prefix + 'js/main.js';
+  mainScript.onerror = () => console.error('CHAKA STORE: js/main.js gagal dimuat');
+  document.body.appendChild(mainScript);
+})();
+</script>
+<script id="chaka-roblox-order-handlers">
+document.addEventListener('click', function (event) {
+  const button = event.target.closest('.roblox-order-btn');
+  if (!button) return;
+  const card = button.closest('.roblox-product-card');
+  if (!card) return;
+  const product = card.dataset.product || card.querySelector('h3')?.textContent.trim() || 'Robux Roblox';
+  const price = card.dataset.price || card.querySelector('.product-price')?.textContent.replace(/\s+/g, ' ').trim() || '';
+  const message = `Halo CHAKA STORE, saya ingin pesan ${product} (${price}).
+Username Roblox (USN): `;
+  if (button.dataset.order === 'whatsapp') {
+    window.open('https://wa.me/6282187552664?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+  } else if (button.dataset.order === 'discord') {
+    window.open('https://discord.gg/hYV749ckgm', '_blank', 'noopener,noreferrer');
+  }
+});
+</script>
+<script id="chaka-discord-decoration-order-handlers">
+document.addEventListener('click', function(event) {
+  const button = event.target.closest('.discord-decoration-order');
+  if (!button) return;
+  const card = button.closest('.discord-decoration-card');
+  if (!card) return;
+  const product = card.dataset.product;
+  const price = card.dataset.discordPrice;
+  const original = card.dataset.originalPrice;
+  const message = `Halo CHAKA STORE, saya ingin pesan ${product} (Harga Discord ${original}, harga CHAKA STORE ${price}). Mohon konfirmasi item Decoration/Nameplate/Profile Effect yang tersedia.`;
+  if (button.dataset.discordOrder === 'whatsapp') {
+    window.open('https://wa.me/6282187552664?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+  } else if (button.dataset.discordOrder === 'discord') {
+    window.open('https://discord.gg/hYV749ckgm', '_blank', 'noopener,noreferrer');
+  }
+});
+</script>
+<script id="chaka-discord-extra-order-handlers">
+document.addEventListener('click', function(event) {
+  const button = event.target.closest('.nitro-order, .discord-account-order');
+  if (!button) return;
+  const card = button.closest('.nitro-card, .discord-account-card');
+  if (!card) return;
+  const product = card.dataset.product || card.querySelector('h3')?.textContent.trim() || 'Produk Discord';
+  const price = card.dataset.price || '';
+  const message = `Halo CHAKA STORE, saya ingin pesan ${product} (${price}). Mohon konfirmasi stok, detail produk, dan syarat yang berlaku sebelum pembayaran.`;
+  if (button.dataset.discordProductOrder === 'whatsapp') {
+    window.open('https://wa.me/6282187552664?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+  } else if (button.dataset.discordProductOrder === 'discord') {
+    window.open('https://discord.gg/hYV749ckgm', '_blank', 'noopener,noreferrer');
+  }
+});
+</script>
+</body></html>
